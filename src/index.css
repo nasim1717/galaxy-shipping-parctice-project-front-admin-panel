@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 	hsl(142, 77%, 73%) */
+/* hsl(0, 84%, 60%) */
+.input-text:focus {
+  border-color: hsl(156 72% 67%);
+  box-shadow: 0 0 0 3px hsla(156, 72%, calc(42% + 40%), 0.8);
+  outline: 3px solid transparent;
+}
+.input-text-error:focus {
+  border-color: hsl(0 84% 67%);
+  box-shadow: 0 0 0 3px hsla(0, 84%, calc(42% + 40%), 0.8);
+  outline: 3px solid transparent;
+}
+
+.hide-scroolbar::-webkit-scrollbar {
+  display: none;
+}
+
+.grd {
+  background-image: linear-gradient(#f8f9fa, #fff);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 30px;
+}
+
+@layer components {
+  .nav-btn {
+    @apply w-9 h-9 hover:bg-[#e7eee7] flex items-center justify-center rounded-md;
+  }
+  .btn {
+    @apply flex items-center py-2 px-4 gap-x-2 text-white rounded-md bg-[#047857] text-sm;
+  }
+  .search-input {
+    @apply py-1 input-text rounded-md bg-[#f8f9fa] border 
+    border-[#e5e7eb] text-sm px-2;
+  }
+}
