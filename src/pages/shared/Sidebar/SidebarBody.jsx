@@ -73,7 +73,7 @@ const SidebarBody = () => {
       ></SidebarNavLink>
       <nav onClick={() => setPricingOnOff(!pricingOnOff)} className="mx-3">
         <ul>
-          <li className="hover:bg-[#216046] py-2 rounded-md">
+          <li className={`${pricingOnOff && "bg-[#216046]"} hover:bg-[#216046] py-2 rounded-md`}>
             <div className={`flex items-center pl-2  ${sidebarOpen ? "" : "gap-x-4"}`}>
               <MdAddShoppingCart className="text-lg"></MdAddShoppingCart>
               <span className={`text-sm ${sidebarOpen ? "hidden" : ""}`}>Pricing</span>
@@ -131,7 +131,7 @@ const SidebarBody = () => {
       </p>
       <nav onClick={() => setSettingsOnOff(!settingsOnOff)} className="mx-3">
         <ul>
-          <li className="hover:bg-[#216046] py-2 rounded-md">
+          <li className={`${settingsOnOff && "bg-[#216046]"} hover:bg-[#216046] py-2 rounded-md`}>
             <div className={`flex items-center pl-2  ${sidebarOpen ? "" : "gap-x-4"}`}>
               <AiOutlineSetting className="text-lg"></AiOutlineSetting>
               <span className={`text-sm ${sidebarOpen ? "hidden" : ""}`}>Settings</span>

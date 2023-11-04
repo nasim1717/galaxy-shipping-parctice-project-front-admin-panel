@@ -45,7 +45,7 @@ const SidebarFooter = () => {
         ></SidebarNavLink>
         <SidebarNavLink
           name={"Ligth Mode"}
-          icon={<MdOutlineLightMode className="text-lg"></MdOutlineLightMode>}
+          icon={<MdOutlineLightMode className="text-lg text-[#fde047]"></MdOutlineLightMode>}
         ></SidebarNavLink>
         <hr className="border-[#e2e8f0] border-1" />
         <SidebarNavLink
