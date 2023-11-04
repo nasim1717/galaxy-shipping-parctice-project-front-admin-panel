@@ -20,7 +20,11 @@ const AutosData = () => {
   const [sortStart, setSortStart] = useState(false);
   const [sorted, setSorted] = useState({ sorted: false, ordBy: null });
 
-  const { data: vehiclesDatas, isError } = useGetVehiclesQuery({
+  const {
+    data: vehiclesDatas,
+    isError,
+    isFetching,
+  } = useGetVehiclesQuery({
     page: curentPage,
     limit: dataLimit,
     sortStart,
@@ -30,9 +34,16 @@ const AutosData = () => {
     globalSearchOn,
   });
 
+  // useEffect(() => {
+  //   setVehiclesAllDatas(<Loader></Loader>);
+  //   console.log("Reander --> 1");
+  // }, [dataLimit, curentPage, sorted, search, globalSearchOn, globalSearch]);
+
   useEffect(() => {
-    setVehiclesAllDatas(<Loader></Loader>);
-  }, [dataLimit, curentPage, sorted, search, globalSearchOn, globalSearch]);
+    if (isFetching) {
+      setVehiclesAllDatas(<Loader></Loader>);
+    }
+  }, [isFetching]);
 
   useEffect(() => {
     if (isError) {
@@ -60,7 +71,7 @@ const AutosData = () => {
         })
       );
     }
-  }, [vehiclesDatas?.data]);
+  }, [vehiclesDatas?.data, vehiclesDatas?.to, vehiclesDatas?.from, vehiclesDatas?.total, dispatch]);
 
   useEffect(() => {
     dispatch(totalPage(vehiclesDatas?.last_page));

@@ -36,31 +36,38 @@ const SidebarBody = () => {
       } mt-4 flex flex-col space-y-3 h-full overflow-y-scroll hide-scroolbar `}
     >
       <SidebarNavLink
+        route="/"
         name="Dashboard"
         icon={<BiGridAlt className="text-lg"></BiGridAlt>}
       ></SidebarNavLink>
       <hr className="border-[#e2e8f0] border-1" />
       <SidebarNavLink
+        route="/"
         name="Customers"
         icon={<CgProfile className="text-lg"></CgProfile>}
       ></SidebarNavLink>
       <SidebarNavLink
+        route="/"
         name="Consignee"
         icon={<MdApartment className="text-lg"></MdApartment>}
       ></SidebarNavLink>
       <SidebarNavLink
+        route="/vehicles"
         name="Autos"
         icon={<RiTaxiLine className="text-lg"></RiTaxiLine>}
       ></SidebarNavLink>
       <SidebarNavLink
+        route="/"
         name="Export"
         icon={<HiArrowsUpDown className="text-lg"></HiArrowsUpDown>}
       ></SidebarNavLink>
       <SidebarNavLink
+        route="/"
         name="Containers"
         icon={<BsTruck className="text-lg"></BsTruck>}
       ></SidebarNavLink>
       <SidebarNavLink
+        route="/"
         name="Gate pass"
         icon={<GiGate className="text-lg"></GiGate>}
       ></SidebarNavLink>
@@ -84,21 +91,25 @@ const SidebarBody = () => {
           >
             <li className={`space-y-3 mt-1 `}>
               <SidebarNavLink
+                route="/"
                 nestedMenu={nestedMenu}
                 name="Towing Rate"
                 icon={<HiMiniPencilSquare className="text-lg"></HiMiniPencilSquare>}
               ></SidebarNavLink>
               <SidebarNavLink
+                route="/"
                 nestedMenu={nestedMenu}
                 name="Shipping Rate"
                 icon={<TbChartBar className="text-lg"></TbChartBar>}
               ></SidebarNavLink>
               <SidebarNavLink
+                route="/"
                 nestedMenu={nestedMenu}
                 name="Clearance Rate"
                 icon={<MdOutlineHealthAndSafety className="text-lg"></MdOutlineHealthAndSafety>}
               ></SidebarNavLink>
               <SidebarNavLink
+                route="/"
                 nestedMenu={nestedMenu}
                 name="Price Inquiry"
                 icon={<MdAttachMoney className="text-lg"></MdAttachMoney>}
@@ -108,6 +119,7 @@ const SidebarBody = () => {
         </ul>
       </nav>
       <SidebarNavLink
+        route="/"
         name="Load plan"
         icon={<CgRedo className="text-lg"></CgRedo>}
       ></SidebarNavLink>
@@ -138,41 +150,49 @@ const SidebarBody = () => {
             <li className={`space-y-3 mt-1 `}>
               {" "}
               <SidebarNavLink
+                route="/"
                 nestedMenu={nestedMenu}
                 name="User"
                 icon={<CgProfile className="text-lg"></CgProfile>}
               ></SidebarNavLink>
               <SidebarNavLink
+                route="/"
                 nestedMenu={nestedMenu}
                 name="Role"
                 icon={<IoMdLock className="text-lg"></IoMdLock>}
               ></SidebarNavLink>
               <SidebarNavLink
+                route="/"
                 nestedMenu={nestedMenu}
                 name="Country"
                 icon={<MdOutlineHealthAndSafety className="text-lg"></MdOutlineHealthAndSafety>}
               ></SidebarNavLink>
               <SidebarNavLink
+                route="/"
                 nestedMenu={nestedMenu}
                 name="State"
                 icon={<MdOutlineHealthAndSafety className="text-lg"></MdOutlineHealthAndSafety>}
               ></SidebarNavLink>
               <SidebarNavLink
+                route="/"
                 nestedMenu={nestedMenu}
                 name="City"
                 icon={<MdOutlineHealthAndSafety className="text-lg"></MdOutlineHealthAndSafety>}
               ></SidebarNavLink>
               <SidebarNavLink
+                route="/"
                 nestedMenu={nestedMenu}
                 name="Yard"
                 icon={<MdOutlineHealthAndSafety className="text-lg"></MdOutlineHealthAndSafety>}
               ></SidebarNavLink>
               <SidebarNavLink
+                route="/"
                 nestedMenu={nestedMenu}
                 name="Port"
                 icon={<MdOutlineHealthAndSafety className="text-lg"></MdOutlineHealthAndSafety>}
               ></SidebarNavLink>
               <SidebarNavLink
+                route="/"
                 nestedMenu={nestedMenu}
                 name="Audit Log"
                 icon={<BsStopwatch className="text-lg"></BsStopwatch>}
