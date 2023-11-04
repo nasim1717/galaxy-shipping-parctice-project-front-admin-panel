@@ -4,6 +4,9 @@ const initialState = {
     curentPage: 1,
     totalPage: 1,
     dataLimit: 20,
+    from: 0,
+    to: 0,
+    items: 0
 };
 
 const paginateSlice = createSlice({
@@ -19,9 +22,14 @@ const paginateSlice = createSlice({
         dataLimit: (state, action) => {
             state.dataLimit = action.payload;
         },
+        dataLimitInfo: (state, action) => {
+            state.from = action.payload.from;
+            state.to = action.payload.to;
+            state.items = action.payload.items;
+        }
     },
 
 });
 
-export const { curentPage, totalPage, dataLimit } = paginateSlice.actions;
+export const { curentPage, totalPage, dataLimit, dataLimitInfo } = paginateSlice.actions;
 export default paginateSlice.reducer;

@@ -1,32 +1,64 @@
-import { HiMagnifyingGlass } from "react-icons/hi2";
-import { AiOutlineCloseCircle } from "react-icons/ai";
 import AutosDataShow from "./AutosDataShow";
 import { useGetVehiclesQuery } from "../../features/vehicles/vehiclesApi";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { totalPage } from "../../features/paginate/paginateSlice";
+import { dataLimitInfo, totalPage } from "../../features/paginate/paginateSlice";
 import Loader from "../../components/Loader/Loader";
+import AutosSearchRow from "./AutosSearchRow";
+import { GoTriangleUp } from "react-icons/go";
+import NoRecordData from "../../components/Loader/NoRecordData";
+import Error from "../../components/Loader/Error";
 
 const AutosData = () => {
   const dispatch = useDispatch();
   const dataLimit = useSelector((state) => state.pagination.dataLimit);
   const curentPage = useSelector((state) => state.pagination.curentPage);
+  const search = useSelector((state) => state.vehicles.search);
+  const globalSearchOn = useSelector((state) => state.vehicles.globalSearchOn);
+  const globalSearch = useSelector((state) => state.vehicles.globalSearch);
   const [vehiclesAllDatas, setVehiclesAllDatas] = useState(<Loader></Loader>);
-  const { data: vehiclesDatas } = useGetVehiclesQuery({
+  const [sortStart, setSortStart] = useState(false);
+  const [sorted, setSorted] = useState({ sorted: false, ordBy: null });
+
+  const { data: vehiclesDatas, isError } = useGetVehiclesQuery({
     page: curentPage,
     limit: dataLimit,
+    sortStart,
+    sorted,
+    search,
+    globalSearch,
+    globalSearchOn,
   });
 
   useEffect(() => {
     setVehiclesAllDatas(<Loader></Loader>);
-  }, [dataLimit, curentPage]);
+  }, [dataLimit, curentPage, sorted, search, globalSearchOn, globalSearch]);
 
   useEffect(() => {
+    if (isError) {
+      setVehiclesAllDatas(<Error></Error>);
+    }
+  }, [isError]);
+
+  useEffect(() => {
+    let content;
     if (vehiclesDatas?.data) {
-      const content = vehiclesDatas?.data.map((vehicles, index) => (
-        <AutosDataShow key={vehicles.id} vehicles={vehicles} index={index}></AutosDataShow>
-      ));
-      setVehiclesAllDatas(content);
+      if (vehiclesDatas?.data.length === 0) {
+        content = <NoRecordData></NoRecordData>;
+        setVehiclesAllDatas(content);
+      } else {
+        content = vehiclesDatas?.data.map((vehicles, index) => (
+          <AutosDataShow key={vehicles.id} vehicles={vehicles} index={index}></AutosDataShow>
+        ));
+        setVehiclesAllDatas(content);
+      }
+      dispatch(
+        dataLimitInfo({
+          to: vehiclesDatas?.to,
+          from: vehiclesDatas?.from,
+          items: vehiclesDatas?.total,
+        })
+      );
     }
   }, [vehiclesDatas?.data]);
 
@@ -44,9 +76,54 @@ const AutosData = () => {
                 <th className="py-3 px-4">Add</th>
                 <th>Image</th>
                 <th className="px-4">Customer Name</th>
-                <th className="px-4">Lot Number</th>
-                <th className="px-4">VIN</th>
-                <th className="px-4">Year</th>
+                <th
+                  onClick={() => {
+                    setSorted({ sorted: !sorted.sorted, ordBy: "lot_number" });
+                    setSortStart(true);
+                  }}
+                  className="px-4 underline "
+                >
+                  <div className="flex  items-center gap-x-1">
+                    <span>Lot Number</span>
+                    <GoTriangleUp
+                      className={`${
+                        sortStart && sorted.ordBy === "lot_number" ? "block" : "hidden"
+                      } ${!sorted.sorted && "rotate-180"} text-lg`}
+                    ></GoTriangleUp>
+                  </div>
+                </th>
+                <th
+                  onClick={() => {
+                    setSorted({ sorted: !sorted.sorted, ordBy: "vin" });
+                    setSortStart(true);
+                  }}
+                  className="px-4 underline "
+                >
+                  <div className="flex  items-center gap-x-1 ">
+                    <span> VIN</span>
+                    <GoTriangleUp
+                      className={`${sortStart && sorted.ordBy === "vin" ? "block" : "hidden"} ${
+                        !sorted.sorted && "rotate-180"
+                      } text-lg`}
+                    ></GoTriangleUp>
+                  </div>
+                </th>
+                <th
+                  onClick={() => {
+                    setSorted({ sorted: !sorted.sorted, ordBy: "year" });
+                    setSortStart(true);
+                  }}
+                  className="px-4 underline"
+                >
+                  <div className="flex  items-center gap-x-1 ">
+                    <span>Year</span>
+                    <GoTriangleUp
+                      className={`${sortStart && sorted.ordBy === "year" ? "block" : "hidden"} ${
+                        !sorted.sorted && "rotate-180"
+                      } text-lg`}
+                    ></GoTriangleUp>
+                  </div>
+                </th>
                 <th className="px-4">Make</th>
                 <th className="px-4">Model</th>
                 <th className="px-4 min-w-[150px]">Purchase Date</th>
@@ -68,158 +145,7 @@ const AutosData = () => {
               </tr>
             </thead>
             <tbody className="">
-              <tr className="rounded-md">
-                <td className="px-4"></td>
-                <td className="px-4"></td>
-                <td className="py-3 px-4">
-                  <select
-                    name="searchCustomer"
-                    id=""
-                    className="search-input min-w-[200px] py-2 text-[#808191]"
-                  >
-                    <option value="nasim1">nasim1</option>
-                    <option value="nasim2">nasim2</option>
-                    <option value="nasim3">nasim3</option>
-                    <option value="nasim4">nasim4</option>
-                  </select>
-                </td>
-                <td className="px-4">
-                  <form>
-                    <input
-                      type="number"
-                      placeholder="Lot No"
-                      className="search-input w-[130px] py-2"
-                    />
-                  </form>
-                </td>
-                <td className="px-4">
-                  <form>
-                    <input type="text" placeholder="VIN" className="search-input w-[130px] py-2" />
-                  </form>
-                </td>
-                <td className="px-4">
-                  <form>
-                    <input
-                      type="number"
-                      placeholder="Year"
-                      className="search-input w-[130px] py-2"
-                    />
-                  </form>
-                </td>
-                <td className="px-4">
-                  <form>
-                    <input type="text" placeholder="Make" className="search-input w-[130px] py-2" />
-                  </form>
-                </td>
-                <td className="px-4">
-                  <form>
-                    <input
-                      type="text"
-                      placeholder="Model"
-                      className="search-input w-[130px] py-2"
-                    />
-                  </form>
-                </td>
-                <td className="px-4"></td>
-                <td className="px-4">
-                  <form>
-                    <input
-                      type="text"
-                      placeholder="Deliver Date"
-                      className="search-input w-[130px] py-2"
-                    />
-                  </form>
-                </td>
-                <td className="px-4">
-                  <select
-                    name="searchKeys"
-                    id=""
-                    className="search-input min-w-[150px] py-2 text-[#808191]"
-                  >
-                    <option value="" hidden>
-                      Select Keys
-                    </option>
-                    <option value="nasim1">nasim1</option>
-                    <option value="nasim2">nasim2</option>
-                    <option value="nasim3">nasim3</option>
-                    <option value="nasim4">nasim4</option>
-                  </select>
-                </td>
-                <td className="px-4">
-                  <select
-                    name="searchYard"
-                    id=""
-                    className="search-input min-w-[150px] py-2 text-[#808191]"
-                  >
-                    <option value="" hidden>
-                      Select Yard
-                    </option>
-                    <option value="nasim1">nasim1</option>
-                    <option value="nasim2">nasim2</option>
-                    <option value="nasim3">nasim3</option>
-                    <option value="nasim4">nasim4</option>
-                  </select>
-                </td>
-                <td className="px-4">
-                  <form>
-                    <input
-                      type="text"
-                      placeholder="Auction"
-                      className="search-input w-[130px] py-2"
-                    />
-                  </form>
-                </td>
-                <td className="px-4"></td>
-                <td className="px-4">
-                  <select
-                    name="searchStatus"
-                    id=""
-                    className="search-input min-w-[150px] py-2 text-[#808191]"
-                  >
-                    <option value="" hidden>
-                      Select Status
-                    </option>
-                    <option value="nasim1">nasim1</option>
-                    <option value="nasim2">nasim2</option>
-                    <option value="nasim3">nasim3</option>
-                    <option value="nasim4">nasim4</option>
-                  </select>
-                </td>
-                <td className="px-4">
-                  <select
-                    name="searchTitle"
-                    id=""
-                    className="search-input min-w-[150px] py-2 text-[#808191]"
-                  >
-                    <option value="" hidden>
-                      Select Title
-                    </option>
-                    <option value="nasim1">nasim1</option>
-                    <option value="nasim2">nasim2</option>
-                    <option value="nasim3">nasim3</option>
-                    <option value="nasim4">nasim4</option>
-                  </select>
-                </td>
-                <td className="px-4"></td>
-                <td className="px-4"></td>
-                <td className="px-4"></td>
-                <td>
-                  <button className="btn hover:bg-[#047857] hover:text-white hover:shadow-2xl bg-[#dcfce7] text-[#065f46] font-extrabold">
-                    <HiMagnifyingGlass className="font-extrabold text-base"></HiMagnifyingGlass>
-                    <span>Search</span>
-                  </button>
-                </td>
-                <td>
-                  <button className="btn hover:bg-[#ef4444] hover:text-white hover:shadow-2xl bg-[#fee2e2] text-[#ef4444] font-extrabold">
-                    <AiOutlineCloseCircle className="font-extrabold text-base"></AiOutlineCloseCircle>
-                    <span>Clear</span>
-                  </button>
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
+              <AutosSearchRow></AutosSearchRow>
               {vehiclesAllDatas}
             </tbody>
           </table>

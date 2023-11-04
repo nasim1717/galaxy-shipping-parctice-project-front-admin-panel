@@ -7,7 +7,8 @@ import { curentPage, dataLimit as limit } from "../../features/paginate/paginate
 
 const AutosFooter = () => {
   const dispatch = useDispatch();
-  const totalPage = useSelector((state) => state.pagination.totalPage);
+  const { totalPage, from, to, items } = useSelector((state) => state.pagination);
+
   const [pageNo, setPageNo] = useState(1);
   const [dataLimit, setDataLimit] = useState(20);
   const { pages, currentPage, isPrevTruncated, isNextTruncated } = usePaginated({
@@ -40,7 +41,9 @@ const AutosFooter = () => {
   return (
     <div className="flex justify-between items-center px-4 text-[#808191] pt-7 ">
       <div className="text-sm">
-        <p>Showing 1 to 20 of 46406 items</p>
+        <p>
+          Showing {from} to {to} of {items} items
+        </p>
       </div>
       <div className="flex gap-x-4">
         <div className="flex justify-center items-center gap-x-4 bg-[#e7eee7] px-3 rounded-md">

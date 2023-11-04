@@ -30,8 +30,8 @@ const AutosDataShow = ({ vehicles, index }) => {
         <img src={photo} alt="" className="min-w-[80px] h-16 py-1" />
       </td>
       <td className="px-4">{customer_name}</td>
-      <td className="px-4">{lot_number}</td>
-      <td className="px-4">{vin}</td>
+      <td className="px-4 text-green-600">{lot_number}</td>
+      <td className="px-4 text-green-600">{vin}</td>
       <td className="px-4">{year}</td>
       <td className="px-4">{make}</td>
       <td className="px-4">{model}</td>
