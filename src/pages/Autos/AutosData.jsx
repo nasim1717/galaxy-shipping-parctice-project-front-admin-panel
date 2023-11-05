@@ -99,7 +99,7 @@ const AutosData = () => {
                     <GoTriangleUp
                       className={`${
                         sortStart && sorted.ordBy === "lot_number" ? "block" : "hidden"
-                      } ${!sorted.sorted && "rotate-180"} text-lg`}
+                      } ${sorted.sorted && "rotate-180"} text-lg`}
                     ></GoTriangleUp>
                   </div>
                 </th>
@@ -114,7 +114,7 @@ const AutosData = () => {
                     <span> VIN</span>
                     <GoTriangleUp
                       className={`${sortStart && sorted.ordBy === "vin" ? "block" : "hidden"} ${
-                        !sorted.sorted && "rotate-180"
+                        sorted.sorted && "rotate-180"
                       } text-lg`}
                     ></GoTriangleUp>
                   </div>
@@ -130,7 +130,7 @@ const AutosData = () => {
                     <span>Year</span>
                     <GoTriangleUp
                       className={`${sortStart && sorted.ordBy === "year" ? "block" : "hidden"} ${
-                        !sorted.sorted && "rotate-180"
+                        sorted.sorted && "rotate-180"
                       } text-lg`}
                     ></GoTriangleUp>
                   </div>

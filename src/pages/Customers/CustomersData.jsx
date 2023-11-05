@@ -58,26 +58,50 @@ const CustomersData = () => {
                 <th className="py-3 px-4">SL</th>
                 <th
                   onClick={() => {
-                    setSorted({ ...sorted, sorted: !sorted, ordBy: "legacy_customer_id" });
+                    setSorted({ ...sorted, sorted: !sorted.sorted, ordBy: "legacy_customer_id" });
                     setSortStart(true);
                   }}
                   className="px-2 underline min-w-[150px]"
                 >
                   <div className="flex items-center gap-x-1">
                     <span>Customer ID</span>
-                    <GoTriangleUp className={`text-lg`}></GoTriangleUp>
+                    <GoTriangleUp
+                      className={`${
+                        sortStart && sorted.ordBy === "legacy_customer_id" ? "block" : "hidden"
+                      } ${sorted.sorted ? "rotate-180" : ""} text-lg`}
+                    ></GoTriangleUp>
                   </div>
                 </th>
-                <th className="px-2 underline ">
+                <th
+                  onClick={() => {
+                    setSorted({ ...sorted, sorted: !sorted.sorted, ordBy: "customer_name" });
+                    setSortStart(true);
+                  }}
+                  className="px-2 underline "
+                >
                   <div className="flex  items-center gap-x-1 min-w-[150px]">
                     <span>Customer Name</span>
-                    <GoTriangleUp className={`text-lg`}></GoTriangleUp>
+                    <GoTriangleUp
+                      className={`${
+                        sortStart && sorted.ordBy === "customer_name" ? "block" : "hidden"
+                      } ${sorted.sorted ? "rotate-180" : ""} text-lg`}
+                    ></GoTriangleUp>
                   </div>
                 </th>
-                <th className="px-2 underline ">
+                <th
+                  onClick={() => {
+                    setSorted({ ...sorted, sorted: !sorted.sorted, ordBy: "company_name" });
+                    setSortStart(true);
+                  }}
+                  className="px-2 underline "
+                >
                   <div className="flex  items-center gap-x-1  min-w-[150px]">
                     <span>Company Name</span>
-                    <GoTriangleUp className={`text-lg`}></GoTriangleUp>
+                    <GoTriangleUp
+                      className={`${
+                        sortStart && sorted.ordBy === "company_name" ? "block" : "hidden"
+                      } ${sorted.sorted ? "rotate-180" : ""} text-lg`}
+                    ></GoTriangleUp>
                   </div>
                 </th>
                 <th className="px-2 min-w-[120px]">All Vehicles</th>
