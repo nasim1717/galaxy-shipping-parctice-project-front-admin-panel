@@ -5,7 +5,6 @@ import { Link, useLocation } from "react-router-dom";
 const SidebarNavLink = ({ name, icon, styled, nestedMenu, route }) => {
   const sidebarOpen = useSelector((state) => state.sidebars.sidebarOpen);
   const location = useLocation();
-  console.log("location-->", location);
 
   return (
     <nav className={`mx-3`}>

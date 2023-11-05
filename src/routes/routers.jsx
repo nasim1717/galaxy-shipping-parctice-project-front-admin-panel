@@ -3,6 +3,7 @@ import Login from "../pages/Login/Login";
 import Main from "../Layout/Main";
 import AutosMain from "../pages/Autos/AutosMain";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import CustomersMain from "../pages/Customers/CustomersMain";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AutosMain></AutosMain>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/customers",
+        element: (
+          <PrivateRoute>
+            <CustomersMain></CustomersMain>
           </PrivateRoute>
         ),
       },

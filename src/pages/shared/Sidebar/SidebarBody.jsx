@@ -42,7 +42,7 @@ const SidebarBody = () => {
       ></SidebarNavLink>
       <hr className="border-[#e2e8f0] border-1" />
       <SidebarNavLink
-        route="/"
+        route="/customers"
         name="Customers"
         icon={<CgProfile className="text-lg"></CgProfile>}
       ></SidebarNavLink>

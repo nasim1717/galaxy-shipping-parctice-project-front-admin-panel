@@ -1,25 +1,21 @@
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Select from "react-select";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { search } from "../../features/vehicles/vehiclesSlice";
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+import { useGetCustomersItemQuery } from "../../features/customers/customersApi";
 
 const customeStyles = {
   control: (styles) => ({ ...styles, minWidth: "200px" }),
 };
 
 const AutosSearchRow = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [isClearable, setIsClearable] = useState(true);
   const [scbtnOnOf, setScbtnOnOf] = useState(false);
   const dispatch = useDispatch();
+  let options = useRef([]);
+  const { data: customersItem, isLoading } = useGetCustomersItemQuery();
   const [columSearch, setColumSearch] = useState({
     deliver_date: "",
     year: "",
@@ -32,6 +28,8 @@ const AutosSearchRow = () => {
     location: "",
     status: "",
     auction_at: "",
+    customer_user_id: "",
+    customer_name: "",
   });
 
   useEffect(() => {
@@ -51,7 +49,28 @@ const AutosSearchRow = () => {
 
   useEffect(() => {
     dispatch(search(columSearch));
-  }, [columSearch.keys, columSearch.location, columSearch.status, columSearch.title]);
+  }, [
+    columSearch.keys,
+    columSearch.location,
+    columSearch.status,
+    columSearch.title,
+    columSearch.customer_user_id,
+    dispatch,
+  ]);
+
+  useEffect(() => {
+    if (customersItem?.data) {
+      options.current = customersItem?.data.map((item) => {
+        return {
+          value: {
+            id: item?.user_id,
+            name: item?.customer_name,
+          },
+          label: item?.customer_name,
+        };
+      });
+    }
+  }, [customersItem?.data]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -71,6 +90,8 @@ const AutosSearchRow = () => {
       location: "",
       status: "",
       auction_at: "",
+      customer_user_id: "",
+      customer_name: "",
     });
   };
 
@@ -80,7 +101,31 @@ const AutosSearchRow = () => {
       <td className="px-4"></td>
       <td className="py-3 px-4">
         <Select
-          options={options}
+          onChange={(e) => {
+            if (e) {
+              console.log("target-->", e);
+              setColumSearch({
+                ...columSearch,
+                customer_user_id: e.value.id,
+                customer_name: e.value.name,
+              });
+            } else {
+              setColumSearch({
+                ...columSearch,
+                customer_user_id: "",
+                customer_name: "",
+              });
+            }
+          }}
+          value={
+            columSearch.customer_name
+              ? {
+                  value: { id: columSearch.customer_user_id, name: columSearch.customer_name },
+                  label: columSearch.customer_name,
+                }
+              : ""
+          }
+          options={options.current}
           styles={customeStyles}
           isClearable={isClearable}
           isLoading={isLoading}
