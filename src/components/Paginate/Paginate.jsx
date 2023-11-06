@@ -27,13 +27,13 @@ const AutosFooter = () => {
   }, [dataLimit, dispatch]);
 
   const handlePageIncrease = () => {
-    if (pageNo < 10) {
+    if (pageNo < totalPage) {
       setPageNo((prev) => prev + 1);
     }
   };
 
   const handlePageDecrease = () => {
-    if (pageNo > 1) {
+    if (pageNo > totalPage) {
       setPageNo((prev) => prev - 1);
     }
   };

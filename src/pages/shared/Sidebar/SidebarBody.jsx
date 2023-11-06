@@ -40,7 +40,7 @@ const SidebarBody = () => {
         name="Dashboard"
         icon={<BiGridAlt className="text-lg"></BiGridAlt>}
       ></SidebarNavLink>
-      <hr className="border-[#e2e8f0] border-1" />
+      <hr className="border-[rgba(231,238,231,.6)] border-1" />
       <SidebarNavLink
         route="/customers"
         name="Customers"
@@ -123,7 +123,7 @@ const SidebarBody = () => {
         name="Load plan"
         icon={<CgRedo className="text-lg"></CgRedo>}
       ></SidebarNavLink>
-      <hr className="border-[#e2e8f0] border-1" />
+      <hr className="border-[rgba(231,238,231,.6)] border-1" />
       <p
         className={`ml-4 text-[#216046] text-[rgba(231,238,231,.6)] ${sidebarOpen ? "hidden" : ""}`}
       >

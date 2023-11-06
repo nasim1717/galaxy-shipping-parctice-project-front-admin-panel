@@ -4,6 +4,7 @@ import authSlice from "../features/auth/authSlice";
 import sidebarSlice from "../features/sidebars/sidebarSlice";
 import paginateSlice from "../features/paginate/paginateSlice";
 import vehiclesSlice from "../features/vehicles/vehiclesSlice";
+import customersSlice from "../features/customers/customersSlice";
 
 
 
@@ -13,7 +14,8 @@ const store = configureStore({
         userAuth: authSlice,
         sidebars: sidebarSlice,
         pagination: paginateSlice,
-        vehicles: vehiclesSlice
+        vehicles: vehiclesSlice,
+        customers: customersSlice
     },
     devTools: process.env.NODE_ENV !== "production",
     middleware: (getDefaultMiddlewares) => getDefaultMiddlewares().concat(apiSlice.middleware),

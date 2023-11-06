@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import Loader from "../../components/Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { dataLimitInfo, totalPage } from "../../features/paginate/paginateSlice";
+import Error from "../../components/Loader/Error";
+import NoRecordData from "../../components/Loader/NoRecordData";
 
 const CustomersData = () => {
   const dispatch = useDispatch();
@@ -14,12 +16,22 @@ const CustomersData = () => {
   const curentPage = useSelector((state) => state.pagination.curentPage);
   const [sorted, setSorted] = useState({ sorted: false, ordBy: null });
   const [sortStart, setSortStart] = useState(false);
+  const { customerSearch, customerGlobalSearch, customerGlobalSearchOn } = useSelector(
+    (state) => state.customers
+  );
 
-  const { data: customers, isFetching } = useGetCustomersQuery({
+  const {
+    data: customers,
+    isFetching,
+    isError,
+  } = useGetCustomersQuery({
     dataLimit: dataLimit,
     curentPage,
     sorted,
     sortStart,
+    customerGlobalSearch,
+    customerGlobalSearchOn,
+    customerSearch,
   });
 
   useEffect(() => {
@@ -29,16 +41,28 @@ const CustomersData = () => {
   }, [isFetching]);
 
   useEffect(() => {
+    if (isError) {
+      setAllCustomers(<Error></Error>);
+    }
+  }, [isError]);
+
+  useEffect(() => {
     if (customers?.data) {
-      let sl = customers.from;
-      let content = customers.data.map((customer, index) => (
-        <CustomerDataShow
-          key={customer.id}
-          customer={customer}
-          index={index}
-          to={sl++}
-        ></CustomerDataShow>
-      ));
+      let content = null;
+      if (customers?.data.length === 0) {
+        content = <NoRecordData></NoRecordData>;
+      } else {
+        let sl = customers.from;
+        content = customers.data.map((customer, index) => (
+          <CustomerDataShow
+            key={customer.id}
+            customer={customer}
+            index={index}
+            to={sl++}
+          ></CustomerDataShow>
+        ));
+      }
+
       setAllCustomers(content);
       dispatch(dataLimitInfo({ from: customers.from, to: customers.to, items: customers.total }));
     }
