@@ -5,6 +5,7 @@ import AddBtn from "../../components/Buttons/AddBtn";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { globalSearch } from "../../features/vehicles/vehiclesSlice";
+import { HiMagnifyingGlass } from "react-icons/hi2";
 
 const AutosContentHead = () => {
   const [vehiclesGlobalSrc, setVehiclesGlbalSrc] = useState("");
@@ -30,7 +31,10 @@ const AutosContentHead = () => {
             className="search-input w-72"
             placeholder="Autos Global Search"
           />
-          <SearchBtn name="Search"></SearchBtn>
+          <SearchBtn
+            name="Search"
+            icon={<HiMagnifyingGlass className="font-extrabold text-base "></HiMagnifyingGlass>}
+          ></SearchBtn>
         </form>
         <div>
           <ExportBtn name="Export"></ExportBtn>

@@ -50,4 +50,10 @@
     @apply py-1 input-text rounded-md bg-[#f8f9fa] border 
     border-[#e5e7eb] text-sm px-2;
   }
+  .customer-modal-inp-content {
+    @apply flex justify-between items-center  md:flex-row flex-col text-[#4b5563];
+  }
+  .customer-modal-input {
+    @apply search-input md:w-96 w-48 py-1;
+  }
 }

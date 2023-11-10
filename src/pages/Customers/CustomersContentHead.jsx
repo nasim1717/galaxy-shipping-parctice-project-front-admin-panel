@@ -4,9 +4,12 @@ import AddBtn from "../../components/Buttons/AddBtn";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { customerGlobalSearch } from "../../features/customers/customersSlice";
+import CustomersModal from "../../Modals/CustomersModal";
+import { HiMagnifyingGlass } from "react-icons/hi2";
 
 const CustomersContentHead = () => {
   const [customersGlobalSearch, setCustomersGlobalSearch] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -29,10 +32,19 @@ const CustomersContentHead = () => {
             className="search-input w-72"
             placeholder="Autos Global Search"
           />
-          <SearchBtn name="Search"></SearchBtn>
+          <SearchBtn
+            name="Search"
+            icon={<HiMagnifyingGlass className="font-extrabold text-base "></HiMagnifyingGlass>}
+          ></SearchBtn>
         </form>
         <div>
-          <AddBtn name="Add Customer"></AddBtn>
+          <span onClick={() => setModalIsOpen(true)}>
+            <AddBtn name="Add Customer"></AddBtn>
+          </span>
+          <CustomersModal
+            modalIsOpen={modalIsOpen}
+            setModalIsOpen={setModalIsOpen}
+          ></CustomersModal>
         </div>
       </div>
     </div>

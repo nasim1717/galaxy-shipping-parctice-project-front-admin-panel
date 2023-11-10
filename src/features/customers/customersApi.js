@@ -7,7 +7,6 @@ export const customersApi = apiSlice.injectEndpoints({
         }),
         getCustomers: builder.query({
             query: ({ dataLimit, curentPage, sorted, sortStart, customerGlobalSearch, customerGlobalSearchOn, customerSearch }) => {
-                console.log("customer glo searcnh--->", customerSearch);
                 let query = "";
                 for (let key in customerSearch) {
                     if (customerSearch[key]) {
