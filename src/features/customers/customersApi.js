@@ -22,9 +22,21 @@ export const customersApi = apiSlice.injectEndpoints({
                     }
                 }
                 return `/customers?${customerGlobalSearchOn ? "customer_global_search=" + customerGlobalSearch + "&" : query}page=${curentPage}&limit=${dataLimit}`
-            }
+            },
+            providesTags: ["Customers"]
+
+        }),
+        createCustomer: builder.mutation({
+            query: (data) => {
+                return {
+                    url: `/customers`,
+                    method: "POST",
+                    body: data,
+                }
+            },
+            invalidatesTags: ["Customers"]
         })
     })
 });
 
-export const { useGetCustomersItemQuery, useGetCustomersQuery } = customersApi;
+export const { useGetCustomersItemQuery, useGetCustomersQuery, useCreateCustomerMutation } = customersApi;

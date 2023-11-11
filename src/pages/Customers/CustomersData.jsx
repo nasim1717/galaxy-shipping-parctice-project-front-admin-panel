@@ -85,7 +85,7 @@ const CustomersData = () => {
                     setSorted({ ...sorted, sorted: !sorted.sorted, ordBy: "legacy_customer_id" });
                     setSortStart(true);
                   }}
-                  className="px-2 underline min-w-[150px]"
+                  className="px-2 underline min-w-[150px] cursor-pointer"
                 >
                   <div className="flex items-center gap-x-1">
                     <span>Customer ID</span>
@@ -101,7 +101,7 @@ const CustomersData = () => {
                     setSorted({ ...sorted, sorted: !sorted.sorted, ordBy: "customer_name" });
                     setSortStart(true);
                   }}
-                  className="px-2 underline "
+                  className="px-2 underline cursor-pointer"
                 >
                   <div className="flex  items-center gap-x-1 min-w-[150px]">
                     <span>Customer Name</span>
@@ -117,7 +117,7 @@ const CustomersData = () => {
                     setSorted({ ...sorted, sorted: !sorted.sorted, ordBy: "company_name" });
                     setSortStart(true);
                   }}
-                  className="px-2 underline "
+                  className="px-2 underline cursor-pointer"
                 >
                   <div className="flex  items-center gap-x-1  min-w-[150px]">
                     <span>Company Name</span>

@@ -39,6 +39,10 @@
   border-radius: 30px;
 }
 
+.modal-overlay {
+  background-color: #6b7280;
+}
+
 @layer components {
   .nav-btn {
     @apply w-9 h-9 hover:bg-[#e7eee7] flex items-center justify-center rounded-md;

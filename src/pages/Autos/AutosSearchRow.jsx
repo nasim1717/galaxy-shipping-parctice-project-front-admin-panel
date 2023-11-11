@@ -103,7 +103,6 @@ const AutosSearchRow = () => {
         <Select
           onChange={(e) => {
             if (e) {
-              console.log("target-->", e);
               setColumSearch({
                 ...columSearch,
                 customer_user_id: e.value.id,

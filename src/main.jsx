@@ -6,6 +6,9 @@ import { RouterProvider } from "react-router-dom";
 import router from "./routes/routers";
 import store from "./app/store";
 import AuthProvider from "./provider/AuthProvider";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
