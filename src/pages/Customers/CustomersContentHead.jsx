@@ -4,7 +4,7 @@ import AddBtn from "../../components/Buttons/AddBtn";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { customerGlobalSearch } from "../../features/customers/customersSlice";
-import CustomersModal from "../../Modals/CustomersModal";
+import CustomersModal from "../../Modals/CustomersModal/CustomersModal";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 
 const CustomersContentHead = () => {

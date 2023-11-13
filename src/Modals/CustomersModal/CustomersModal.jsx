@@ -2,13 +2,13 @@ import Modal from "react-modal";
 import { RxCross1 } from "react-icons/rx";
 import Select from "react-select";
 import { useState } from "react";
-import SearchBtn from "../components/Buttons/SearchBtn";
+import SearchBtn from "../../components/Buttons/SearchBtn";
 import { AiOutlinePlus } from "react-icons/ai";
 import { MdErrorOutline } from "react-icons/md";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { countrysApi } from "../features/countrys/countrysApi";
-import { customersApi, useCreateCustomerMutation } from "../features/customers/customersApi";
+import { countrysApi } from "../../features/countrys/countrysApi";
+import { customersApi } from "../../features/customers/customersApi";
 import { useForm, Controller } from "react-hook-form";
 import { BounceLoader } from "react-spinners";
 

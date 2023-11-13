@@ -39,8 +39,30 @@
   border-radius: 30px;
 }
 
-.modal-overlay {
-  background-color: #6b7280;
+@keyframes slideIn {
+  from {
+    transform: translateY(-300%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.animate-slideIn {
+  animation: slideIn 0.5s ease-in-out;
+}
+
+.animate-slideOut {
+  animation: slideOut 0.3s ease-in-out;
 }
 
 @layer components {
@@ -59,5 +81,11 @@
   }
   .customer-modal-input {
     @apply search-input md:w-96 w-48 py-1;
+  }
+  .autos-modal-inp-content {
+    @apply flex justify-between xl:items-center  xl:flex-row flex-col text-[#6b7280] text-sm;
+  }
+  .autos-modal-input {
+    @apply search-input xl:w-96 md:w-72 w-40 py-1 text-black;
   }
 }

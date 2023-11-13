@@ -6,14 +6,24 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { globalSearch } from "../../features/vehicles/vehiclesSlice";
 import { HiMagnifyingGlass } from "react-icons/hi2";
+import AutosModal from "../../Modals/AutosModal/AutosModal";
 
 const AutosContentHead = () => {
   const [vehiclesGlobalSrc, setVehiclesGlbalSrc] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const diaptch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     diaptch(globalSearch(vehiclesGlobalSrc));
+  };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
   };
 
   return (
@@ -39,10 +49,11 @@ const AutosContentHead = () => {
         <div>
           <ExportBtn name="Export"></ExportBtn>
         </div>
-        <div>
+        <div onClick={openModal}>
           <AddBtn name="Add Auto"></AddBtn>
         </div>
       </div>
+      <AutosModal isOpen={modalIsOpen} onClose={closeModal} />
     </div>
   );
 };
