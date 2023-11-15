@@ -71,7 +71,7 @@ const TowingInfo = () => {
         {/* state start */}
         <div className="autos-modal-inp-content">
           <label htmlFor="state">State</label>
-          <div className="xl:w-96 md:w-72 w-48">
+          <div className="xl:w-96 md:w-72 w-44">
             <Select options={options} isClearable={true} styles={customeStyles}></Select>
           </div>
         </div>
@@ -79,7 +79,7 @@ const TowingInfo = () => {
         {/* picture start */}
         <div className="autos-modal-inp-content">
           <label htmlFor="pictures">Pictures</label>
-          <div className="flex  gap-x-3 pr-72">
+          <div className="flex gap-x-3 md:pr-72">
             <div className="flex gap-x-2">
               <input type="radio" name="pictures" id="yes" />
               <label htmlFor="yes">Yes</label>
@@ -94,7 +94,7 @@ const TowingInfo = () => {
         {/* city start */}
         <div className="autos-modal-inp-content">
           <label htmlFor="city">City</label>
-          <div className="xl:w-96 md:w-72 w-48">
+          <div className="xl:w-96 md:w-72 w-44">
             <Select options={options} isClearable={true} styles={customeStyles}></Select>
           </div>
         </div>
@@ -102,7 +102,7 @@ const TowingInfo = () => {
         {/* Towed start */}
         <div className="autos-modal-inp-content">
           <label htmlFor="Towed">Towed</label>
-          <div className="flex  gap-x-3 pr-72">
+          <div className="flex  gap-x-3 md:pr-72">
             <div className="flex gap-x-2">
               <input type="radio" name="towed" id="yes" />
               <label htmlFor="yes">Yes</label>
@@ -134,7 +134,7 @@ const TowingInfo = () => {
         {/* key start */}
         <div className="autos-modal-inp-content">
           <label htmlFor="key">Key</label>
-          <div className="flex gap-x-3 pr-72">
+          <div className="flex gap-x-3 md:pr-72">
             <div className="flex gap-x-2">
               <input type="radio" name="key" id="yes" />
               <label htmlFor="yes">Yes</label>
