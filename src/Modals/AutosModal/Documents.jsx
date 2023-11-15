@@ -2,7 +2,7 @@ import { MdOutlineCloudUpload } from "react-icons/md";
 
 const Documents = () => {
   return (
-    <div className="mb-2 px-3">
+    <div className="mb-2 px-3 ">
       <div className="space-y-6">
         <div>
           <p className="pb-1">Auto Document</p>

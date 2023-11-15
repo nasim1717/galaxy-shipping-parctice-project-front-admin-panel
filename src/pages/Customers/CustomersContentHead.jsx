@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { customerGlobalSearch } from "../../features/customers/customersSlice";
 import CustomersModal from "../../Modals/CustomersModal/CustomersModal";
 import { HiMagnifyingGlass } from "react-icons/hi2";
+import toast, { Toaster } from "react-hot-toast";
 
 const CustomersContentHead = () => {
   const [customersGlobalSearch, setCustomersGlobalSearch] = useState("");
@@ -15,6 +16,13 @@ const CustomersContentHead = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(customerGlobalSearch(customersGlobalSearch));
+  };
+
+  const openModal = (close, success) => {
+    if (success) {
+      toast.success("Customers Create Successfully");
+    }
+    setModalIsOpen(close);
   };
 
   return (
@@ -41,12 +49,10 @@ const CustomersContentHead = () => {
           <span onClick={() => setModalIsOpen(true)}>
             <AddBtn name="Add Customer"></AddBtn>
           </span>
-          <CustomersModal
-            modalIsOpen={modalIsOpen}
-            setModalIsOpen={setModalIsOpen}
-          ></CustomersModal>
+          <CustomersModal modalIsOpen={modalIsOpen} openModal={openModal}></CustomersModal>
         </div>
       </div>
+      <Toaster position="top-right"></Toaster>
     </div>
   );
 };

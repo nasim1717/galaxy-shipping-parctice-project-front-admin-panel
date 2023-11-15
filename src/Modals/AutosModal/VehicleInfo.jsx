@@ -1,8 +1,15 @@
 import { useState } from "react";
+import { useFormContext, Controller } from "react-hook-form";
+import { MdErrorOutline } from "react-icons/md";
 
 const VehicleInfo = () => {
   const [numericValue, setNumericValue] = useState("");
   const [numericValueYear, setNumericValueYear] = useState("");
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   const handleInputChange = (event) => {
     let inputValue = event.target.value;
@@ -70,7 +77,21 @@ const VehicleInfo = () => {
         {/* lot not start */}
         <div className="autos-modal-inp-content">
           <label htmlFor="lotno">Lot No</label>
-          <input type="text" id="lotno" placeholder="Lot No" className="autos-modal-input" />
+          <div className="relative xl:w-96 md:w-72 sm:w-60 w-48">
+            <input
+              {...register("lot_number", { required: "Lot can not be blank" })}
+              type="text"
+              id="lotno"
+              placeholder="Lot No"
+              className={`autos-modal-input ${
+                errors?.lot_number && "input-text-error border-red-500"
+              }`}
+            />
+            {errors?.lot_number && (
+              <MdErrorOutline className="absolute top-2 right-2 text-red-500"></MdErrorOutline>
+            )}
+            {errors?.lot_number && <p className="text-red-500">{errors?.lot_number?.message}</p>}
+          </div>
         </div>
         {/* lot end */}
         {/* damaged start */}
@@ -109,7 +130,25 @@ const VehicleInfo = () => {
         {/* vin no start */}
         <div className="autos-modal-inp-content">
           <label htmlFor="vin">VIN</label>
-          <input type="text" id="vin" placeholder="VIN" className="autos-modal-input" />
+          <div className="xl:w-96 md:w-72 sm:w-60 w-48 relative">
+            <input
+              {...register("vin", {
+                required: "Vin can not be blank",
+                minLength: {
+                  value: 17,
+                  message: "Vin must be 17 character",
+                },
+              })}
+              type="text"
+              id="vin"
+              placeholder="VIN"
+              className={`autos-modal-input ${errors?.vin && "input-text-error border-red-500"}`}
+            />
+            {errors?.vin && (
+              <MdErrorOutline className="absolute top-2 right-2 text-red-500"></MdErrorOutline>
+            )}
+            {errors?.vin && <p className="text-red-500">{errors?.vin?.message}</p>}
+          </div>
         </div>
         {/* vin no end */}
         {/*Buyer No start  */}
@@ -121,14 +160,38 @@ const VehicleInfo = () => {
         {/* year start */}
         <div className="autos-modal-inp-content">
           <label htmlFor="year">Year</label>
-          <input
-            onChange={handleInputChangeYear}
-            value={numericValueYear}
-            type="text"
-            id="year"
-            placeholder="Year"
-            className="autos-modal-input"
-          />
+          <div className="xl:w-96 md:w-72 sm:w-60 w-48 relative">
+            <Controller
+              name="year"
+              control={control}
+              rules={{
+                required: "Year can not be blank",
+              }}
+              render={({ field }) => (
+                <>
+                  <input
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      handleInputChangeYear(e);
+                    }}
+                    value={numericValueYear ? numericValueYear : ""}
+                    type="text"
+                    id="year"
+                    placeholder="Year"
+                    className={`autos-modal-input ${
+                      errors?.year && "input-text-error border-red-500"
+                    }`}
+                  />
+                </>
+              )}
+            ></Controller>
+
+            {errors?.year && (
+              <MdErrorOutline className="absolute top-2 right-2 text-red-500"></MdErrorOutline>
+            )}
+            {errors?.year && <p className="text-red-500">{errors?.year?.message}</p>}
+          </div>
         </div>
         {/* year end */}
         {/* action name */}
@@ -144,7 +207,19 @@ const VehicleInfo = () => {
         {/* make start */}
         <div className="autos-modal-inp-content">
           <label htmlFor="make">Make</label>
-          <input type="text" id="make" placeholder="Make" className="autos-modal-input" />
+          <div className="xl:w-96 md:w-72 sm:w-60 w-48 relative">
+            <input
+              {...register("make", { required: "Make can not be blank" })}
+              type="text"
+              id="make"
+              placeholder="Make"
+              className={`autos-modal-input ${errors?.year && "input-text-error border-red-500"}`}
+            />
+            {errors?.make && (
+              <MdErrorOutline className="absolute top-2 right-2 text-red-500"></MdErrorOutline>
+            )}
+            {errors?.make && <p className="text-red-500">{errors?.make?.message}</p>}
+          </div>
         </div>
         {/* make end */}
         {/* Storage Amount start */}
@@ -161,7 +236,19 @@ const VehicleInfo = () => {
         {/* model start */}
         <div className="autos-modal-inp-content">
           <label htmlFor="model">Model</label>
-          <input type="text" id="model" placeholder="Model" className="autos-modal-input" />
+          <div className="xl:w-96 md:w-72 sm:w-60 w-48 relative">
+            <input
+              {...register("model", { required: "Model can not be blank" })}
+              type="text"
+              id="model"
+              placeholder="Model"
+              className={`autos-modal-input ${errors?.model && "input-text-error border-red-500"}`}
+            />
+            {errors?.model && (
+              <MdErrorOutline className="absolute top-2 right-2 text-red-500"></MdErrorOutline>
+            )}
+            {errors?.model && <p className="text-red-500">{errors?.model?.message}</p>}
+          </div>
         </div>
         {/* model end */}
         {/* Add CHGS start*/}

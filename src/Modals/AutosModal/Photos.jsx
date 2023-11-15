@@ -2,9 +2,9 @@ import { MdOutlineCloudUpload } from "react-icons/md";
 
 const Photos = () => {
   return (
-    <div className="mb-7 px-3">
+    <div className="mb-7 px-3 ">
       <div className="space-y-6">
-        <div>
+        <div className="">
           <p className="pb-1">Auction Photos</p>
           <div className="flex items-center ">
             <input type="file" id="auctionPhotos" className="file-input-box" />

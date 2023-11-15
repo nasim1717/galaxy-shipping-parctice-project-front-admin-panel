@@ -17,9 +17,20 @@ export const vehiclesApi = apiSlice.injectEndpoints({
                     return `/vehicles?${globalSearchOn ? "vehicle_global_search=" + globalSearch + "&" : query}order_by_column=${sorted.ordBy}&order_by=ASC& page=${page}&limit=${limit}`
                 }
                 return `/vehicles?${globalSearchOn ? "vehicle_global_search=" + globalSearch + "&" : query}page=${page}&limit=${limit}`
-            }
+            },
+            providesTags: ["Vehicles"]
         }),
+        addVehicle: builder.mutation({
+            query: (data) => {
+                return {
+                    url: `/vehicles`,
+                    method: "POST",
+                    body: data,
+                }
+            },
+            invalidatesTags: ["Vehicles"]
+        })
     })
 });
 
-export const { useGetVehiclesQuery } = vehiclesApi;
+export const { useGetVehiclesQuery, useAddVehicleMutation } = vehiclesApi;

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { MdErrorOutline } from "react-icons/md";
 import Select from "react-select";
 
 const customeStyles = {
@@ -8,6 +10,10 @@ const customeStyles = {
 const TowingInfo = () => {
   const [options, setOptions] = useState([]);
   const [city, setCity] = useState([]);
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <div className="flex flex-col gap-y-3 px-3 mb-5">
@@ -117,18 +123,31 @@ const TowingInfo = () => {
         {/* yard start */}
         <div className="autos-modal-inp-content">
           <label htmlFor="Yard">Yard</label>
-          <select name="yard" id="Yard" className="autos-modal-input text-gray-700 ">
-            <option value="">Select Yard</option>
-            <option value={0}>WA</option>
-            <option value={1}>VANCOUVER</option>
-            <option value={2}>CALGARY</option>
-            <option value={3}>EDMONTON</option>
-            <option value={4}>HALIFAX</option>
-            <option value={5}>MONTREAL</option>
-            <option value={6}>TORONTO</option>
-            <option value={7}>GA</option>
-            <option value={8}>LA</option>
-          </select>
+          <div className="xl:w-96 md:w-72 sm:w-60 w-48 relative">
+            <select
+              {...register("location_id", { required: "Yard can not be blank" })}
+              name="location_id"
+              id="Yard"
+              className={`autos-modal-input text-gray-700 ${
+                errors?.location_id && "input-text-error border-red-500"
+              }`}
+            >
+              <option value="">Select Yard</option>
+              <option value={21}>WA</option>
+              <option value={22}>VANCOUVER</option>
+              <option value={23}>CALGARY</option>
+              <option value={24}>EDMONTON</option>
+              <option value={25}>HALIFAX</option>
+              <option value={26}>MONTREAL</option>
+              <option value={27}>TORONTO</option>
+              <option value={28}>GA</option>
+              <option value={29}>LA</option>
+            </select>
+            {errors?.location_id && (
+              <MdErrorOutline className="absolute top-2 right-5 text-red-500"></MdErrorOutline>
+            )}
+            {errors?.location_id && <p className="text-red-500">{errors?.location_id?.message}</p>}
+          </div>
         </div>
         {/* yard end*/}
         {/* key start */}

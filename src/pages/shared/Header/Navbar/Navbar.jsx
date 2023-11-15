@@ -6,8 +6,8 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 
 const Navbar = () => {
   return (
-    <div className="flex justify-between items-center bg-white py-4 px-4 rounded-md text-[#808191] shadow-lg ">
-      <div>
+    <div className=" w-full flex justify-between items-center bg-white py-4 px-4 rounded-md text-[#808191] shadow-lg ">
+      <div className="">
         <p className="text-sm">Galaxy Shipping</p>
       </div>
       <div>

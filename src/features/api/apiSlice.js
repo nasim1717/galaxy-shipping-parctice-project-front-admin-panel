@@ -26,7 +26,7 @@ export const apiSlice = createApi({
 
         return result;
     },
-    tagTypes: ["Customers"],
+    tagTypes: ["Customers", "Vehicles"],
     // eslint-disable-next-line no-unused-vars
     endpoints: (builder) => ({})
 });

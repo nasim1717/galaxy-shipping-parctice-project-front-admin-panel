@@ -5,15 +5,15 @@ import Footer from "../pages/shared/Footer/Footer";
 
 const Main = () => {
   return (
-    <div className="mx-auto  ">
-      <div className="flex ">
+    <div className="mx-auto ">
+      <div className="flex relative">
         <Sidebar></Sidebar>
-        <div className={`flex flex-col w-full relative gap-y-4  ml-5 mr-4 `}>
-          <header className="">
+        <div className={`flex flex-col w-full gap-y-4 ml-5 mr-4  `}>
+          <header className="sticky top-0 w-full  ">
             <Navbar></Navbar>
           </header>
           <Outlet></Outlet>
-          <footer>
+          <footer className="sticky bottom-0 w-full ">
             <Footer></Footer>
           </footer>
         </div>

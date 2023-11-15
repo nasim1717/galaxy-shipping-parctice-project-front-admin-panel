@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { globalSearch } from "../../features/vehicles/vehiclesSlice";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import AutosModal from "../../Modals/AutosModal/AutosModal";
+import toast, { Toaster } from "react-hot-toast";
 
 const AutosContentHead = () => {
   const [vehiclesGlobalSrc, setVehiclesGlbalSrc] = useState("");
@@ -22,7 +23,10 @@ const AutosContentHead = () => {
     setModalIsOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (success) => {
+    if (success) {
+      toast.success("Autos Create Successfully");
+    }
     setModalIsOpen(false);
   };
 
@@ -54,6 +58,7 @@ const AutosContentHead = () => {
         </div>
       </div>
       <AutosModal isOpen={modalIsOpen} onClose={closeModal} />
+      <Toaster position="top-right"></Toaster>
     </div>
   );
 };

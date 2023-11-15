@@ -19,7 +19,7 @@ const customStyles = {
     marginRight: "auto",
     marginBottom: "5px",
     maxHeight: "650px",
-    maxWidth: "1300px",
+    maxWidth: "1150px",
     transition: "top 3s ease-in",
   },
   overlay: {
@@ -29,7 +29,7 @@ const customStyles = {
 };
 
 // eslint-disable-next-line react/prop-types
-const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
+const CustomersModal = ({ modalIsOpen, openModal }) => {
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [countryLoading, setCountryLoading] = useState(true);
@@ -137,7 +137,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
           setPhone("");
           setEmail("");
           setSavedLoading(false);
-          closeModal();
+          closeModal(false, true);
         }
       })
       .catch((error) => {
@@ -154,7 +154,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
       });
   };
 
-  const closeModal = () => {
+  const closeModal = (close, success) => {
     setCompanyName("");
     setCustomerName("");
     setPassWord("");
@@ -165,7 +165,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
     setPhone("");
     setEmail("");
     reset();
-    setModalIsOpen(false);
+    openModal(close, success);
   };
 
   const handleClick = () => {
@@ -179,7 +179,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
       <Modal isOpen={modalIsOpen} style={customStyles} contentLabel="Example Modal ">
         <div className="flex justify-between text-[#1f2937] mb-7 ">
           <p>Add Customer</p>
-          <button onClick={closeModal}>
+          <button onClick={() => closeModal(false, false)}>
             <RxCross1 className="text-xl"></RxCross1>
           </button>
         </div>
@@ -198,7 +198,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
             {/* password start */}
             <div className="customer-modal-inp-content">
               <label htmlFor="password">Password</label>
-              <div className="relative">
+              <div className="xl:w-96 md:w-64 sm:w-48 w-36 relative">
                 <Controller
                   name="password"
                   control={control}
@@ -240,7 +240,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
             {/* username start */}
             <div className="customer-modal-inp-content">
               <label htmlFor="username">Username</label>
-              <div className="relative">
+              <div className="xl:w-96 md:w-64 sm:w-48 w-36 relative">
                 <Controller
                   name="username"
                   control={control}
@@ -280,7 +280,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
             {/* email start */}
             <div className="customer-modal-inp-content">
               <label htmlFor="email">Email</label>
-              <div className="relative">
+              <div className="xl:w-96 md:w-64 sm:w-48 w-36 relative">
                 <Controller
                   name="email"
                   control={control}
@@ -320,7 +320,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
             {/* customer name start */}
             <div className="customer-modal-inp-content">
               <label htmlFor="customerName">Customer Name</label>
-              <div className="relative">
+              <div className="xl:w-96 md:w-64 sm:w-48 w-36 relative">
                 <Controller
                   name="customer_name"
                   control={control}
@@ -359,7 +359,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
             {/* company name start */}
             <div className="customer-modal-inp-content">
               <label htmlFor="companyName">Company Name</label>
-              <div className="relative">
+              <div className="xl:w-96 md:w-64 sm:w-48 w-36 relative">
                 <Controller
                   name="company_name"
                   control={control}
@@ -398,7 +398,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
             {/* phone start */}
             <div className="customer-modal-inp-content">
               <label htmlFor="phone">Phone</label>
-              <div className="relative">
+              <div className="xl:w-96 md:w-64 sm:w-48 w-36 relative">
                 <Controller
                   name="phone"
                   control={control}
@@ -482,7 +482,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
             {/* country start */}
             <div className="customer-modal-inp-content">
               <label htmlFor="country">Country</label>
-              <div className="md:w-96 w-48">
+              <div className="xl:w-96 md:w-64 sm:w-48 w-36">
                 <Controller
                   name="country"
                   control={control}
@@ -526,7 +526,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
             {/* state start */}
             <div className="customer-modal-inp-content">
               <label htmlFor="state">State</label>
-              <div className="md:w-96 w-48">
+              <div className="xl:w-96 md:w-64 sm:w-48 w-36">
                 <Controller
                   name="state"
                   control={control}
@@ -568,7 +568,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
             {/* city start */}
             <div className="customer-modal-inp-content">
               <label htmlFor="city">City</label>
-              <div className="md:w-96 w-48">
+              <div className="xl:w-96 md:w-64 sm:w-48 w-36">
                 <Controller
                   name="city"
                   control={control}
@@ -678,6 +678,7 @@ const CustomersModal = ({ modalIsOpen, setModalIsOpen }) => {
         <div onClick={handleClick} className="flex justify-end mt-5 relative ">
           <SearchBtn
             name={"Save"}
+            loading={savedLoading}
             icon={<AiOutlinePlus className="font-extrabold text-base"></AiOutlinePlus>}
           ></SearchBtn>
           {savedLoading && (
