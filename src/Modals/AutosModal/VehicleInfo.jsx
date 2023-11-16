@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useFormContext, Controller } from "react-hook-form";
 import { MdErrorOutline } from "react-icons/md";
+import { BounceLoader } from "react-spinners";
 
 const VehicleInfo = () => {
   const [numericValue, setNumericValue] = useState("");
@@ -8,6 +9,7 @@ const VehicleInfo = () => {
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
   const [vin, setVin] = useState("");
+  const [autoFilLoader, setAutoFillLoader] = useState(false);
   const {
     register,
     control,
@@ -26,10 +28,12 @@ const VehicleInfo = () => {
   };
 
   const handleAutoFill = async () => {
+    setAutoFillLoader(true);
     const res = await fetch(
       `https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/${vin}?format=json`
     );
     const data = await res.json();
+    setAutoFillLoader(false);
     setModel(data.Results[0].Model);
     setMake(data.Results[0].Make);
     setNumericValueYear(data.Results[0].ModelYear);
@@ -186,12 +190,23 @@ const VehicleInfo = () => {
               {errors?.vin && <p className="text-red-500">{errors?.vin?.message}</p>}
             </div>
             {vin.length >= 17 && (
-              <button
-                onClick={handleAutoFill}
-                className="btn flex justify-center items-center py-1 text-center max-[1279px]:w-72  max-[767px]:w-60 max-[639px]:w-48"
-              >
-                Auto Fill
-              </button>
+              <div className=" relative">
+                <button
+                  onClick={handleAutoFill}
+                  className={`btn flex justify-center items-center py-1 text-center max-[1279px]:w-72  max-[767px]:w-60 max-[639px]:w-48 ${
+                    autoFilLoader && "opacity-90"
+                  }`}
+                >
+                  Auto Fill
+                </button>
+                {autoFilLoader && (
+                  <BounceLoader
+                    color="#e3e3d0"
+                    size={20}
+                    className="absolute -right-8 -top-6 max-[639px]:-right-20 max-[767px]:-right-24 max-[1279px]:-right-36 "
+                  />
+                )}
+              </div>
             )}
           </div>
         </div>
