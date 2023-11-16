@@ -5,6 +5,9 @@ import { MdErrorOutline } from "react-icons/md";
 const VehicleInfo = () => {
   const [numericValue, setNumericValue] = useState("");
   const [numericValueYear, setNumericValueYear] = useState("");
+  const [make, setMake] = useState("");
+  const [model, setModel] = useState("");
+  const [vin, setVin] = useState("");
   const {
     register,
     control,
@@ -20,6 +23,16 @@ const VehicleInfo = () => {
     let inputValue = event.target.value;
     inputValue = inputValue.replace(/[^0-9]/g, "");
     setNumericValueYear(inputValue);
+  };
+
+  const handleAutoFill = async () => {
+    const res = await fetch(
+      `https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/${vin}?format=json`
+    );
+    const data = await res.json();
+    setModel(data.Results[0].Model);
+    setMake(data.Results[0].Make);
+    setNumericValueYear(data.Results[0].ModelYear);
   };
 
   return (
@@ -130,24 +143,56 @@ const VehicleInfo = () => {
         {/* vin no start */}
         <div className="autos-modal-inp-content">
           <label htmlFor="vin">VIN</label>
-          <div className="xl:w-96 md:w-72 sm:w-60 w-48 relative">
-            <input
-              {...register("vin", {
-                required: "Vin can not be blank",
-                minLength: {
-                  value: 17,
-                  message: "Vin must be 17 character",
-                },
-              })}
-              type="text"
-              id="vin"
-              placeholder="VIN"
-              className={`autos-modal-input ${errors?.vin && "input-text-error border-red-500"}`}
-            />
-            {errors?.vin && (
-              <MdErrorOutline className="absolute top-2 right-2 text-red-500"></MdErrorOutline>
+          <div className="flex xl:gap-x-2 xl:flex-row gap-y-2 flex-col">
+            <div
+              className={` ${
+                vin.length >= 17 ? "xl:w-[18.4rem] md:w-72 sm:w-60" : "xl:w-96  md:w-72 sm:w-60"
+              } relative`}
+            >
+              <Controller
+                name="vin"
+                control={control}
+                rules={{
+                  required: "Vin can not be blank",
+                  minLength: {
+                    value: 17,
+                    message: "Vin must be 17 character",
+                  },
+                }}
+                render={({ field }) => (
+                  <>
+                    <input
+                      {...field}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        setVin(e.target.value);
+                      }}
+                      value={vin}
+                      type="text"
+                      id="vin"
+                      placeholder="VIN"
+                      className={`autos-modal-input ${
+                        vin.length >= 17
+                          ? "xl:w-[18.4rem] md:w-72 sm:w-60"
+                          : "xl:w-96  md:w-72 sm:w-60"
+                      } ${errors?.vin && "input-text-error border-red-500"}`}
+                    />
+                  </>
+                )}
+              ></Controller>
+              {errors?.vin && (
+                <MdErrorOutline className="absolute top-2 right-2 text-red-500"></MdErrorOutline>
+              )}
+              {errors?.vin && <p className="text-red-500">{errors?.vin?.message}</p>}
+            </div>
+            {vin.length >= 17 && (
+              <button
+                onClick={handleAutoFill}
+                className="btn flex justify-center items-center py-1 text-center max-[1279px]:w-72  max-[767px]:w-60 max-[639px]:w-48"
+              >
+                Auto Fill
+              </button>
             )}
-            {errors?.vin && <p className="text-red-500">{errors?.vin?.message}</p>}
           </div>
         </div>
         {/* vin no end */}
@@ -208,13 +253,32 @@ const VehicleInfo = () => {
         <div className="autos-modal-inp-content">
           <label htmlFor="make">Make</label>
           <div className="xl:w-96 md:w-72 sm:w-60 w-48 relative">
-            <input
-              {...register("make", { required: "Make can not be blank" })}
-              type="text"
-              id="make"
-              placeholder="Make"
-              className={`autos-modal-input ${errors?.year && "input-text-error border-red-500"}`}
-            />
+            <Controller
+              name="make"
+              control={control}
+              rules={{
+                required: "Make can not be blank",
+              }}
+              render={({ field }) => (
+                <>
+                  <input
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setMake(e.target.value);
+                    }}
+                    value={make}
+                    type="text"
+                    id="make"
+                    placeholder="Make"
+                    className={`autos-modal-input ${
+                      errors?.year && "input-text-error border-red-500"
+                    }`}
+                  />
+                </>
+              )}
+            ></Controller>
+
             {errors?.make && (
               <MdErrorOutline className="absolute top-2 right-2 text-red-500"></MdErrorOutline>
             )}
@@ -237,13 +301,32 @@ const VehicleInfo = () => {
         <div className="autos-modal-inp-content">
           <label htmlFor="model">Model</label>
           <div className="xl:w-96 md:w-72 sm:w-60 w-48 relative">
-            <input
-              {...register("model", { required: "Model can not be blank" })}
-              type="text"
-              id="model"
-              placeholder="Model"
-              className={`autos-modal-input ${errors?.model && "input-text-error border-red-500"}`}
-            />
+            <Controller
+              name="model"
+              control={control}
+              rules={{
+                required: "Model can not be blank",
+              }}
+              render={({ field }) => (
+                <>
+                  <input
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setModel(e.target.value);
+                    }}
+                    value={model}
+                    type="text"
+                    id="model"
+                    placeholder="Model"
+                    className={`autos-modal-input ${
+                      errors?.model && "input-text-error border-red-500"
+                    }`}
+                  />
+                </>
+              )}
+            ></Controller>
+
             {errors?.model && (
               <MdErrorOutline className="absolute top-2 right-2 text-red-500"></MdErrorOutline>
             )}

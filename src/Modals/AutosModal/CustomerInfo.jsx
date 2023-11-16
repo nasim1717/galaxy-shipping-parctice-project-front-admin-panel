@@ -18,7 +18,6 @@ const CustomersInfo = () => {
 
   useEffect(() => {
     if (customersInfo?.data) {
-      console.log(customersInfo.data);
       const optionsarray = customersInfo?.data.map((item) => {
         return {
           value: {
