@@ -8,6 +8,7 @@ import { globalSearch } from "../../features/vehicles/vehiclesSlice";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import AutosModal from "../../Modals/AutosModal/AutosModal";
 import toast, { Toaster } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const AutosContentHead = () => {
   const [vehiclesGlobalSrc, setVehiclesGlbalSrc] = useState("");
@@ -32,6 +33,9 @@ const AutosContentHead = () => {
 
   return (
     <div className="flex justify-between items-center pb-4  px-4 rounded-md border-b">
+      <Helmet>
+        <title>Autos | Galaxy Shipping</title>
+      </Helmet>
       <div className="flex gap-x-3 items-center">
         <FaCarRear className="text-3xl text-[#1e40af]"></FaCarRear>
         <p className="text-lg font-semibold text-[#3f3f46]">Autos</p>

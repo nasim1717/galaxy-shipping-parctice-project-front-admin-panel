@@ -7,6 +7,7 @@ import { customerGlobalSearch } from "../../features/customers/customersSlice";
 import CustomersModal from "../../Modals/CustomersModal/CustomersModal";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import toast, { Toaster } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const CustomersContentHead = () => {
   const [customersGlobalSearch, setCustomersGlobalSearch] = useState("");
@@ -27,6 +28,9 @@ const CustomersContentHead = () => {
 
   return (
     <div className="flex justify-between items-center pb-4  px-4 rounded-md border-b">
+      <Helmet>
+        <title>Customers | Galaxy Shipping</title>
+      </Helmet>
       <div className="flex gap-x-3 items-center">
         <CgProfile className="text-3xl text-[#1e40af]"></CgProfile>
         <p className="text-lg font-semibold text-[#3f3f46]">Customers</p>

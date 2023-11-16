@@ -7,15 +7,18 @@ import router from "./routes/routers";
 import store from "./app/store";
 import AuthProvider from "./provider/AuthProvider";
 import Modal from "react-modal";
+import { HelmetProvider } from "react-helmet-async";
 
 Modal.setAppElement("#root");
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <AuthProvider>
-        <RouterProvider router={router}></RouterProvider>
-      </AuthProvider>
-    </Provider>
+    <HelmetProvider>
+      <Provider store={store}>
+        <AuthProvider>
+          <RouterProvider router={router}></RouterProvider>
+        </AuthProvider>
+      </Provider>
+    </HelmetProvider>
   </React.StrictMode>
 );
