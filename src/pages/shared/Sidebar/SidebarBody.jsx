@@ -57,7 +57,7 @@ const SidebarBody = () => {
         icon={<RiTaxiLine className="text-lg"></RiTaxiLine>}
       ></SidebarNavLink>
       <SidebarNavLink
-        route="/"
+        route="/exports"
         name="Export"
         icon={<HiArrowsUpDown className="text-lg"></HiArrowsUpDown>}
       ></SidebarNavLink>

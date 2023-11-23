@@ -97,4 +97,10 @@
   .file-upload-btn {
     @apply flex items-center justify-center gap-x-2 border border-solid py-1 px-3 rounded-e-lg border-gray-600 hover:bg-gray-300 text-sm font-semibold;
   }
+  .export-modal-inp-content {
+    @apply flex justify-between xl:items-center  xl:flex-row flex-col text-[#6b7280] text-sm;
+  }
+  .export-modal-input {
+    @apply search-input xl:w-96 md:w-72 sm:w-60 w-48 py-1 text-black;
+  }
 }

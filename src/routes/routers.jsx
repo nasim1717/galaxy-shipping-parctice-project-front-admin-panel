@@ -4,6 +4,7 @@ import Main from "../Layout/Main";
 import AutosMain from "../pages/Autos/AutosMain";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import CustomersMain from "../pages/Customers/CustomersMain";
+import ExportsMain from "../pages/Exports/ExportsMain";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <CustomersMain></CustomersMain>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/exports",
+        element: (
+          <PrivateRoute>
+            <ExportsMain></ExportsMain>
           </PrivateRoute>
         ),
       },
