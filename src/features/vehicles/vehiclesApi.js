@@ -29,8 +29,14 @@ export const vehiclesApi = apiSlice.injectEndpoints({
                 }
             },
             invalidatesTags: ["Vehicles"]
-        })
+        }),
+        getVehiclesVin: builder.query({
+            query: () => `/vehicle-search?vin=`
+        }),
+        getSingleVehicles: builder.query({
+            query: (id) => `/vehicles/${id}`
+        }),
     })
 });
 
-export const { useGetVehiclesQuery, useAddVehicleMutation } = vehiclesApi;
+export const { useGetVehiclesQuery, useAddVehicleMutation, useGetVehiclesVinQuery, useGetSingleVehiclesQuery } = vehiclesApi;

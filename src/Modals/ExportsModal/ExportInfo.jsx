@@ -1,15 +1,15 @@
 import Select from "react-select";
 import { useGetCustomersItemQuery } from "../../features/customers/customersApi";
 import { useEffect, useState } from "react";
-
-const customeStyles = {
-  control: (styles) => ({ ...styles, minWidth: "200px" }),
-};
+import { streamshipLine } from "../../helper/selectOption";
+import { useDispatch } from "react-redux";
+import { selectCustomer } from "../../features/exports/exportsSlice";
 
 const ExportInfo = () => {
-  const [customrs, setCustomers] = useState({ customer_name: "", id: "" });
+  const [customrs, setCustomers] = useState({ customer_name: "", id: "", customerUserId: "" });
   const [customersOptions, setCustomersOptions] = useState([]);
   const { data: customersItem, isLoading } = useGetCustomersItemQuery();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (customersItem?.data) {
@@ -18,6 +18,7 @@ const ExportInfo = () => {
           value: {
             id: item?.legacy_customer_id,
             name: item?.customer_name,
+            customerUserId: item.user_id,
           },
           label: item?.customer_name,
         };
@@ -40,13 +41,17 @@ const ExportInfo = () => {
                     ...customrs,
                     id: e.value.id,
                     customer_name: e.value.name,
+                    customerUserId: e.value.customerUserId,
                   });
+                  dispatch(selectCustomer(e.value));
                 } else {
                   setCustomers({
                     ...customrs,
                     id: "",
                     customer_name: "",
+                    customerUserId: "",
                   });
+                  dispatch(selectCustomer({}));
                 }
               }}
               value={
@@ -57,8 +62,8 @@ const ExportInfo = () => {
                     }
                   : ""
               }
+              placeholder="Customer Name"
               options={customersOptions}
-              styles={customeStyles}
               isClearable={true}
               isLoading={isLoading}
             ></Select>
@@ -105,15 +110,19 @@ const ExportInfo = () => {
           <label htmlFor="Voyage">Voyage</label>
           <input type="text" id="Voyage" placeholder="Voyage" className="export-modal-input" />
         </div>
+        {/*Streamship Line start  */}
         <div className="export-modal-inp-content">
           <label htmlFor="StreamshipLine">Streamship Line</label>
-          <input
-            type="text"
-            id="StreamshipLine"
-            placeholder="Streamship Line"
-            className="export-modal-input"
-          />
+          <select name="" id="" className="export-modal-input">
+            <option value="">Select Streamship Line</option>
+            {streamshipLine.map((option) => (
+              <option key={option.label} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
+        {/* Streamship Line end */}
         <div className="export-modal-inp-content">
           <label htmlFor="XTNNo">XTN No</label>
           <input type="text" id="XTNNo" placeholder="XTN No" className="export-modal-input" />

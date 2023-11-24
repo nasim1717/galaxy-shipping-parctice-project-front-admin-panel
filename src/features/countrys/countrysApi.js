@@ -10,8 +10,11 @@ export const countrysApi = apiSlice.injectEndpoints({
         }),
         getCity: builder.query({
             query: (id) => `settings/cities?state_id=${id}&name=`
+        }),
+        getPort: builder.query({
+            query: (id) => `settings/ports?state_id=${id}&status=1`
         })
     })
 });
 
-export const { useGetCountryQuery, useGetStateQuery, useGetCityQuery } = countrysApi;
+export const { useGetCountryQuery, useGetStateQuery, useGetCityQuery, useGetPortQuery } = countrysApi;

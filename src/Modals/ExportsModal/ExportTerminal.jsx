@@ -15,9 +15,13 @@ const ExportTerminal = () => {
   const [allCountrys, setAllCountrys] = useState([]);
   const [terminalAllStates, setTerminalAllStates] = useState([]);
   const [destinationsAllStates, setDestinationAllSates] = useState([]);
+  const [terminalAllPorts, setTerminalAllPorts] = useState([]);
+  const [destinationAllPorts, setDestinationAllPorts] = useState([]);
   const [searchLoading, setSearchLoading] = useState({
     terminalStateLoading: false,
+    terminalPorts: false,
     destinationStateLoading: false,
+    destinationPortsLoading: false,
   });
   const { data: countrys, isLoading } = useGetCountryQuery();
   const dispatch = useDispatch();
@@ -36,7 +40,6 @@ const ExportTerminal = () => {
     dispatch(countrysApi.endpoints.getState.initiate(searchCountryId))
       .unwrap()
       .then((data) => {
-        console.log(data);
         const options = data?.data?.map((state) => ({
           value: { id: state.id, value: state.name },
           label: state.name,
@@ -47,6 +50,25 @@ const ExportTerminal = () => {
         } else if (checkSetState === "destination") {
           setDestinationAllSates(options);
           setSearchLoading({ ...searchLoading, destinationStateLoading: false });
+        }
+      })
+      .catch((er) => console.log(er));
+  };
+
+  const searchPorts = (searchStateId, checkSetPorts) => {
+    dispatch(countrysApi.endpoints.getPort.initiate(searchStateId))
+      .unwrap()
+      .then((res) => {
+        const options = res?.data?.map((port) => ({
+          value: { id: port.id, value: port.name },
+          label: port.name,
+        }));
+        if (checkSetPorts === "terminal") {
+          setTerminalAllPorts(options);
+          setSearchLoading({ ...searchLoading, terminalPorts: false });
+        } else if (checkSetPorts === "destination") {
+          setDestinationAllPorts(options);
+          setSearchLoading({ ...searchLoading, destinationPortsLoading: false });
         }
       })
       .catch((er) => console.log(er));
@@ -69,6 +91,10 @@ const ExportTerminal = () => {
                     setSearchLoading({ ...searchLoading, terminalStateLoading: true });
                   } else {
                     setTerminalCountry("");
+                    setTerminalState("");
+                    setTerminalPartOf("");
+                    setTerminalAllPorts([]);
+                    setTerminalAllStates([]);
                   }
                 }}
                 value={
@@ -77,11 +103,9 @@ const ExportTerminal = () => {
                         value: { id: terminalCountry.id, value: terminalCountry.value },
                         label: terminalCountry.value,
                       }
-                    : {
-                        value: { id: "", value: "" },
-                        label: "Select Country...",
-                      }
+                    : ""
                 }
+                placeholder="Select Country..."
                 options={allCountrys}
                 isClearable={true}
                 isLoading={isLoading}
@@ -92,6 +116,26 @@ const ExportTerminal = () => {
             <label htmlFor="TerminalState">State</label>
             <div className="xl:w-96 md:w-72 sm:w-60 w-48">
               <Select
+                onChange={(e) => {
+                  if (e?.value) {
+                    setTerminalState(e.value);
+                    setSearchLoading({ ...searchLoading, terminalPorts: true });
+                    searchPorts(e.value.id, "terminal");
+                  } else {
+                    setTerminalState("");
+                    setTerminalPartOf("");
+                    setTerminalAllPorts([]);
+                  }
+                }}
+                value={
+                  termianlState
+                    ? {
+                        value: { id: termianlState.id, value: termianlState.value },
+                        label: termianlState.value,
+                      }
+                    : ""
+                }
+                placeholder="Select State..."
                 options={terminalAllStates}
                 isClearable={true}
                 isLoading={searchLoading.terminalStateLoading}
@@ -101,7 +145,27 @@ const ExportTerminal = () => {
           <div className="export-modal-inp-content">
             <label htmlFor="TerminalPortofloading">Port of loading</label>
             <div className="xl:w-96 md:w-72 sm:w-60 w-48">
-              <Select options={options} isClearable={true}></Select>
+              <Select
+                onChange={(e) => {
+                  if (e?.value) {
+                    setTerminalPartOf(e.value);
+                  } else {
+                    setTerminalPartOf("");
+                  }
+                }}
+                value={
+                  terminalPartOf
+                    ? {
+                        value: { id: terminalPartOf.id, value: terminalPartOf.value },
+                        label: terminalPartOf.value,
+                      }
+                    : ""
+                }
+                options={terminalAllPorts}
+                isClearable={true}
+                isLoading={searchLoading.terminalPorts}
+                placeholder="Select Part Of Loading"
+              ></Select>
             </div>
           </div>
         </div>
@@ -120,6 +184,10 @@ const ExportTerminal = () => {
                     setSearchLoading({ ...searchLoading, destinationStateLoading: true });
                   } else {
                     setDesetinationCountry("");
+                    setDestinationState("");
+                    setDestinationAllSates([]);
+                    setDestinationPartOf("");
+                    setDestinationAllPorts([]);
                   }
                 }}
                 value={
@@ -128,11 +196,9 @@ const ExportTerminal = () => {
                         value: { id: destinationCountry.id, value: destinationCountry.value },
                         label: destinationCountry.value,
                       }
-                    : {
-                        value: { id: "", value: "" },
-                        label: "Select Country...",
-                      }
+                    : ""
                 }
+                placeholder="Select Country..."
                 options={allCountrys}
                 isClearable={true}
                 isLoading={isLoading}
@@ -143,7 +209,27 @@ const ExportTerminal = () => {
             <label htmlFor="TerminalState">State</label>
             <div className="xl:w-96 md:w-72 sm:w-60 w-48">
               <Select
+                onChange={(e) => {
+                  if (e?.value) {
+                    setDestinationState(e?.value);
+                    searchPorts(e.value.id, "destination");
+                    setSearchLoading({ ...searchLoading, destinationPortsLoading: true });
+                  } else {
+                    setDestinationState("");
+                    setDestinationPartOf("");
+                    setDestinationAllPorts([]);
+                  }
+                }}
+                value={
+                  destinationState
+                    ? {
+                        value: { id: destinationState.id, value: destinationState.value },
+                        label: destinationState.value,
+                      }
+                    : ""
+                }
                 options={destinationsAllStates}
+                placeholder="Select State..."
                 isClearable={true}
                 isLoading={searchLoading.destinationStateLoading}
               ></Select>
@@ -152,7 +238,27 @@ const ExportTerminal = () => {
           <div className="export-modal-inp-content">
             <label htmlFor="DestinationPortofDischarge">Port of Discharge</label>
             <div className="xl:w-96 md:w-72 sm:w-60 w-48">
-              <Select options={options} isClearable={true}></Select>
+              <Select
+                onChange={(e) => {
+                  if (e?.value) {
+                    setDestinationPartOf(e?.value);
+                  } else {
+                    setDestinationPartOf("");
+                  }
+                }}
+                value={
+                  destinationPartOf
+                    ? {
+                        value: { id: destinationPartOf.id, value: destinationPartOf.value },
+                        label: destinationPartOf.value,
+                      }
+                    : ""
+                }
+                placeholder="Select Port of Discharge"
+                options={destinationAllPorts}
+                isClearable={true}
+                isLoading={searchLoading.destinationPortsLoading}
+              ></Select>
             </div>
           </div>
         </div>

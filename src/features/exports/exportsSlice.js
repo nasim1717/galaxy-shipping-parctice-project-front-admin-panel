@@ -4,6 +4,7 @@ const initialState = {
     search: {},
     globalSearch: "",
     globalSearchOn: false,
+    selectCustomer: {},
 };
 
 const exportsSlice = createSlice({
@@ -17,9 +18,12 @@ const exportsSlice = createSlice({
         globalSearch: (state, action) => {
             state.globalSearch = action.payload;
             state.globalSearchOn = true;
+        },
+        selectCustomer: (state, action) => {
+            state.selectCustomer = action.payload;
         }
     }
 });
 
-export const { search, globalSearch } = exportsSlice.actions;
+export const { search, globalSearch, selectCustomer } = exportsSlice.actions;
 export default exportsSlice.reducer

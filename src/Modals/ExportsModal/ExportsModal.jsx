@@ -9,11 +9,13 @@ import DockReciptMoreinfo from "./DockReciptMoreinfo";
 import HoustonCustomsCoverLetter from "./HoustonCustomsCoverLetter";
 import ExportsFilesManage from "./ExportsFilesManage";
 import ExportTerminal from "./ExportTerminal";
+import VinInfo from "./VinInfo";
 
 // eslint-disable-next-line react/prop-types
 const ExportsModal = ({ isOpen, onClose }) => {
   const [isClosing, setIsClosing] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [vinIds, setVinIds] = useState([]);
 
   useEffect(() => {
     if (isOpen) {
@@ -51,8 +53,9 @@ const ExportsModal = ({ isOpen, onClose }) => {
                 <RxCross2 className="text-2xl"></RxCross2>
               </button>
             </div>
-            <hr className="border-gray-400 border-solid mb-3" />
+
             <main className="mt-2 overflow-scroll h-[83%]">
+              <VinInfo vinIds={vinIds} setVinIds={setVinIds}></VinInfo>
               <ExportInfo></ExportInfo>
               <hr className="border-gray-400 border-solid mb-3" />
               <OthersInformation></OthersInformation>

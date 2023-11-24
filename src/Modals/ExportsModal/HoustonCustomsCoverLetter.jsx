@@ -1,4 +1,26 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { searchApi } from "../../features/search/searchApi";
+
 const HoustonCustomsCoverLetter = () => {
+  const selectCustomer = useSelector((state) => state.exportsSlice.selectCustomer);
+  const [consgineeOptions, setConsgineeOptions] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!selectCustomer?.customerUserId) {
+      setConsgineeOptions([]);
+    } else {
+      dispatch(searchApi.endpoints.consigneSearch.initiate(selectCustomer.customerUserId))
+        .unwrap()
+        .then((data) => {
+          console.log(data);
+          setConsgineeOptions(data);
+        })
+        .catch((er) => console.log("consgine search Error", er));
+    }
+  }, [selectCustomer, dispatch]);
+
   return (
     <div className="flex flex-col gap-y-3 px-3 mb-5">
       <p>Houston Customs Cover Letter</p>
@@ -74,6 +96,11 @@ const HoustonCustomsCoverLetter = () => {
           <label htmlFor="Consignee">Consignee</label>
           <select type="text" id="Consignee" className="export-modal-input">
             <option value="">Select Consignee</option>
+            {consgineeOptions.map((consigne) => (
+              <option key={consigne.id} value={consigne.id}>
+                {consigne.name}
+              </option>
+            ))}
           </select>
         </div>
         {/* Consignee end */}
