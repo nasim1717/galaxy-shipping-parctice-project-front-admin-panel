@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet-async";
 import { LuArrowUpDown } from "react-icons/lu";
 import { globalSearch } from "../../features/exports/exportsSlice";
 import ExportsModal from "../../Modals/ExportsModal/ExportsModal";
+import toast, { Toaster } from "react-hot-toast";
 
 const ExportsContentHead = () => {
   const [exportsGlobalSearch, setExportsGlobalSearch] = useState("");
@@ -17,7 +18,10 @@ const ExportsContentHead = () => {
     setModalIsOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (success) => {
+    if (success) {
+      toast.success("Exports Create Successfully");
+    }
     setModalIsOpen(false);
   };
 
@@ -50,12 +54,13 @@ const ExportsContentHead = () => {
           ></SearchBtn>
         </form>
         <div>
-          <span onClick={openModal}>
+          <div onClick={openModal}>
             <AddBtn name="Add export"></AddBtn>
-          </span>
-          <ExportsModal isOpen={modalIsOpen} onClose={closeModal}></ExportsModal>
+          </div>
         </div>
       </div>
+      <ExportsModal isOpen={modalIsOpen} onClose={closeModal}></ExportsModal>
+      <Toaster position="top-right"></Toaster>
     </div>
   );
 };

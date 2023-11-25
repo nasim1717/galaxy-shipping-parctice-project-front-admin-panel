@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import Select from "react-select";
 import { countrysApi, useGetCountryQuery } from "../../features/countrys/countrysApi";
 import { useDispatch } from "react-redux";
-
-const options = [];
+import { useFormContext, Controller } from "react-hook-form";
 
 const ExportTerminal = () => {
   const [terminalCountry, setTerminalCountry] = useState("");
@@ -25,6 +24,11 @@ const ExportTerminal = () => {
   });
   const { data: countrys, isLoading } = useGetCountryQuery();
   const dispatch = useDispatch();
+  const {
+    formState: { errors },
+    control,
+    register,
+  } = useFormContext();
 
   useEffect(() => {
     if (countrys?.data) {
@@ -145,27 +149,43 @@ const ExportTerminal = () => {
           <div className="export-modal-inp-content">
             <label htmlFor="TerminalPortofloading">Port of loading</label>
             <div className="xl:w-96 md:w-72 sm:w-60 w-48">
-              <Select
-                onChange={(e) => {
-                  if (e?.value) {
-                    setTerminalPartOf(e.value);
-                  } else {
-                    setTerminalPartOf("");
-                  }
+              <Controller
+                name="port_of_loading"
+                control={control}
+                rules={{
+                  required: "port of loading is Required",
                 }}
-                value={
-                  terminalPartOf
-                    ? {
-                        value: { id: terminalPartOf.id, value: terminalPartOf.value },
-                        label: terminalPartOf.value,
+                render={({ field }) => (
+                  <>
+                    <Select
+                      {...field}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        if (e?.value) {
+                          setTerminalPartOf(e.value);
+                        } else {
+                          setTerminalPartOf("");
+                        }
+                      }}
+                      value={
+                        terminalPartOf
+                          ? {
+                              value: { id: terminalPartOf.id, value: terminalPartOf.value },
+                              label: terminalPartOf.value,
+                            }
+                          : ""
                       }
-                    : ""
-                }
-                options={terminalAllPorts}
-                isClearable={true}
-                isLoading={searchLoading.terminalPorts}
-                placeholder="Select Part Of Loading"
-              ></Select>
+                      options={terminalAllPorts}
+                      isClearable={true}
+                      isLoading={searchLoading.terminalPorts}
+                      placeholder="Select Part Of Loading"
+                    ></Select>
+                  </>
+                )}
+              ></Controller>
+              {errors?.port_of_loading && (
+                <p className="text-red-500">{errors?.port_of_loading?.message}</p>
+              )}
             </div>
           </div>
         </div>
@@ -238,27 +258,43 @@ const ExportTerminal = () => {
           <div className="export-modal-inp-content">
             <label htmlFor="DestinationPortofDischarge">Port of Discharge</label>
             <div className="xl:w-96 md:w-72 sm:w-60 w-48">
-              <Select
-                onChange={(e) => {
-                  if (e?.value) {
-                    setDestinationPartOf(e?.value);
-                  } else {
-                    setDestinationPartOf("");
-                  }
+              <Controller
+                name="port_of_discharge"
+                control={control}
+                rules={{
+                  required: "Port of discharge is Required",
                 }}
-                value={
-                  destinationPartOf
-                    ? {
-                        value: { id: destinationPartOf.id, value: destinationPartOf.value },
-                        label: destinationPartOf.value,
+                render={({ field }) => (
+                  <>
+                    <Select
+                      {...field}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        if (e?.value) {
+                          setDestinationPartOf(e?.value);
+                        } else {
+                          setDestinationPartOf("");
+                        }
+                      }}
+                      value={
+                        destinationPartOf
+                          ? {
+                              value: { id: destinationPartOf.id, value: destinationPartOf.value },
+                              label: destinationPartOf.value,
+                            }
+                          : ""
                       }
-                    : ""
-                }
-                placeholder="Select Port of Discharge"
-                options={destinationAllPorts}
-                isClearable={true}
-                isLoading={searchLoading.destinationPortsLoading}
-              ></Select>
+                      placeholder="Select Port of Discharge"
+                      options={destinationAllPorts}
+                      isClearable={true}
+                      isLoading={searchLoading.destinationPortsLoading}
+                    ></Select>
+                  </>
+                )}
+              ></Controller>
+              {errors?.port_of_discharge && (
+                <p className="text-red-500">{errors?.port_of_discharge?.message}</p>
+              )}
             </div>
           </div>
         </div>

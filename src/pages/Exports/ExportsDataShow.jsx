@@ -2,10 +2,15 @@ import DeleteButtons from "../../components/Buttons/DeleteButtons";
 import EditButton from "../../components/Buttons/EditButton";
 import ViewButton from "../../components/Buttons/ViewButton";
 import { IoDocumentTextOutline } from "react-icons/io5";
+import { useDeleteExportsMutation } from "../../features/exports/exportsApi";
+import Swal from "sweetalert2";
 
 // eslint-disable-next-line react/prop-types
 const ExportsDataShow = ({ exports, index }) => {
+  const [deleteExports] = useDeleteExportsMutation();
+
   const {
+    id,
     container_number,
     booking_number,
     terminal,
@@ -16,6 +21,28 @@ const ExportsDataShow = ({ exports, index }) => {
     status_name,
     customer_name,
   } = exports;
+
+  const handleDelete = (deleteId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delete Vin!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteExports(deleteId);
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
+  };
+
   return (
     <tr className={`${index % 2 === 0 && "bg-gray-100"} rounded-md  text-[#4b5563]`}>
       <td className="px-4">{container_number}</td>
@@ -39,7 +66,7 @@ const ExportsDataShow = ({ exports, index }) => {
       <td className="px-1">
         <EditButton></EditButton>
       </td>
-      <td className="">
+      <td onClick={() => handleDelete(id)} className="">
         <DeleteButtons></DeleteButtons>
       </td>
     </tr>
