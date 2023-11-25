@@ -5,6 +5,13 @@ const initialState = {
     globalSearch: "",
     globalSearchOn: false,
     selectCustomer: {},
+    fileUrls: {
+        container_images: [],
+        empty_container_photos: [],
+        export_invoice_photo: [],
+        loaded_photos: [],
+        loading_photos: []
+    }
 };
 
 const exportsSlice = createSlice({
@@ -21,9 +28,12 @@ const exportsSlice = createSlice({
         },
         selectCustomer: (state, action) => {
             state.selectCustomer = action.payload;
+        },
+        fileUrls: (state, action) => {
+            state.fileUrls = action.payload
         }
     }
 });
 
-export const { search, globalSearch, selectCustomer } = exportsSlice.actions;
+export const { search, globalSearch, selectCustomer, fileUrls } = exportsSlice.actions;
 export default exportsSlice.reducer

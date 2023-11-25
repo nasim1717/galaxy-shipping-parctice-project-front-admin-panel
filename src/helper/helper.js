@@ -11,7 +11,7 @@ export const createUploadFrileUrl = (e) => {
 };
 
 export const handelRemoveFile = (e, fileUrls) => {
-    const result = fileUrls.filter((item) => item !== e);
+    const result = fileUrls.filter((item) => item.url !== e);
     URL.revokeObjectURL(e);
     return result
 };

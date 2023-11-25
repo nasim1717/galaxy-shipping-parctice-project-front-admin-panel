@@ -11,7 +11,7 @@ import ExportsFilesManage from "./ExportsFilesManage";
 import ExportTerminal from "./ExportTerminal";
 import VinInfo from "./VinInfo";
 import { useForm, FormProvider } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { exportsApi } from "../../features/exports/exportsApi";
 
 // eslint-disable-next-line react/prop-types
@@ -21,6 +21,7 @@ const ExportsModal = ({ isOpen, onClose }) => {
   const [vinIds, setVinIds] = useState([]);
   const methods = useForm();
   const dispatch = useDispatch();
+  const file_urls = useSelector((state) => state.exportsSlice.fileUrls);
 
   useEffect(() => {
     if (isOpen) {
@@ -38,7 +39,7 @@ const ExportsModal = ({ isOpen, onClose }) => {
   };
 
   const onSubmit = (datas) => {
-    // console.log(datas);
+    // console.log("datas--->", datas);
     setLoading(true);
     const data = {
       booking_number: datas.booking_number,
@@ -52,6 +53,7 @@ const ExportsModal = ({ isOpen, onClose }) => {
       terminal: datas.terminal,
       vessel: datas.vessel,
       vehicle_ids: vinIds,
+      file_urls,
     };
 
     if (vinIds.length === 0) {
