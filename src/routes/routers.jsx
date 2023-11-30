@@ -5,6 +5,7 @@ import AutosMain from "../pages/Autos/AutosMain";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import CustomersMain from "../pages/Customers/CustomersMain";
 import ExportsMain from "../pages/Exports/ExportsMain";
+import ConsigneeMain from "../pages/Consignee/ConsigneeMain";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ExportsMain></ExportsMain>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/consignees",
+        element: (
+          <PrivateRoute>
+            <ConsigneeMain></ConsigneeMain>
           </PrivateRoute>
         ),
       },

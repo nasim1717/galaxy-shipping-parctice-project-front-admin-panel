@@ -47,7 +47,7 @@ const SidebarBody = () => {
         icon={<CgProfile className="text-lg"></CgProfile>}
       ></SidebarNavLink>
       <SidebarNavLink
-        route="/"
+        route="/consignees"
         name="Consignee"
         icon={<MdApartment className="text-lg"></MdApartment>}
       ></SidebarNavLink>
