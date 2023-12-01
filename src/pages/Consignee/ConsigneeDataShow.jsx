@@ -13,7 +13,7 @@ const ConsigneeDataShow = ({ consignees, index, serial }) => {
       <td className="px-4">{consignee_name}</td>
       <td className="px-4">{consignee_address_1}</td>
       <td className="px-4">{phone}</td>
-      <td className=" py-2">
+      <td className="py-2">
         <ViewButton></ViewButton>
       </td>
       <td className="px-1">

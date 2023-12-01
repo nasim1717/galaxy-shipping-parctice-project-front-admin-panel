@@ -6,9 +6,12 @@ import { Helmet } from "react-helmet-async";
 import ExportsModal from "../../Modals/ExportsModal/ExportsModal";
 import toast, { Toaster } from "react-hot-toast";
 import { MdApartment } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { consigneeGlobalSearch } from "../../features/consignee/consigneeSlice";
 
 const ConsigneeContentHead = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -23,6 +26,7 @@ const ConsigneeContentHead = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(consigneeGlobalSearch(e.target.globalSearch.value));
   };
 
   return (
@@ -36,7 +40,12 @@ const ConsigneeContentHead = () => {
       </div>
       <div className="flex gap-x-1 items-center">
         <form onSubmit={handleSubmit} className="flex items-center gap-x-2">
-          <input type="text" className="search-input w-72" placeholder="Consignee Global Search" />
+          <input
+            type="text"
+            name="globalSearch"
+            className="search-input w-72"
+            placeholder="Consignee Global Search"
+          />
           <SearchBtn
             name="Search"
             icon={<HiMagnifyingGlass className="font-extrabold text-base "></HiMagnifyingGlass>}

@@ -11,15 +11,16 @@ import { dataLimitInfo, totalPage } from "../../features/paginate/paginateSlice"
 const ConsingeeData = () => {
   const currentPage = useSelector((state) => state.pagination.curentPage);
   const dataLimit = useSelector((state) => state.pagination.dataLimit);
+  const search = useSelector((state) => state.consigneeSlice.consigneeSearch);
+  const globalSearch = useSelector((state) => state.consigneeSlice.consigneeGlobalSearch);
+  const globalSearchOn = useSelector((state) => state.consigneeSlice.consigneeGlobalSearchOn);
   const [consignees, setConsignees] = useState(<Loader></Loader>);
   const dispatch = useDispatch();
   const {
     data: consigneesData,
     isFetching,
     isError,
-  } = useGetConsigneesQuery({ currentPage, dataLimit });
-
-  console.log(consigneesData);
+  } = useGetConsigneesQuery({ currentPage, dataLimit, search, globalSearch, globalSearchOn });
 
   useEffect(() => {
     if (isFetching) {
@@ -80,9 +81,9 @@ const ConsingeeData = () => {
               <th className="px-2 min-w-[100px]">Consignee Name</th>
               <th className="px-4 min-w-[100px]">Consignee Address 1</th>
               <th className="px-2 min-w-[100px]">Phone</th>
-              <th className="px-2 min-w-[100px]">Action</th>
-              <th className="px-2 min-w-[100px]"></th>
-              <th className="px-2 min-w-[100px]"></th>
+              <th className="px-2 ">Action</th>
+              <th className="px-2 "></th>
+              <th className="px-2"></th>
               <th className="px-2 min-w-[100px]"></th>
             </tr>
           </thead>
