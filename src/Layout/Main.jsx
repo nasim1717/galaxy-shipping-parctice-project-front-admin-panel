@@ -13,7 +13,7 @@ const Main = () => {
             <Navbar></Navbar>
           </header>
           <Outlet></Outlet>
-          <footer className="sticky bottom-0 w-full ">
+          <footer className="sticky bottom-4 w-full ">
             <Footer></Footer>
           </footer>
         </div>

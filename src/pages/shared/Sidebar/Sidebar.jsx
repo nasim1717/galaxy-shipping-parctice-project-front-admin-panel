@@ -34,7 +34,7 @@ const Sidebar = () => {
     <aside
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`bg-[rgb(14,82,54)] ml-3 sticky top-3 bottom-2 h-[97.5vh] text-white rounded-md grid grid-cols-1 grid-rows-1 overflow-hidden  ${
+      className={`bg-[rgb(14,82,54)] ml-3 sticky top-3  mt-3 mb-3 bottom-3 h-[95vh] text-white rounded-md grid grid-cols-1 grid-rows-1 overflow-hidden  ${
         sidebarOpen && !openHover ? "min-w-[70px] " : "min-w-[200px]"
       }`}
     >
