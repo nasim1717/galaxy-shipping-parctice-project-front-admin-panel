@@ -103,4 +103,7 @@
   .export-modal-input {
     @apply search-input xl:w-96 md:w-72 sm:w-60 w-48 py-1 text-black;
   }
+  .consigne-modal-input {
+    @apply search-input 2xl:w-96 md:w-72 sm:w-60 w-48 py-1 text-black;
+  }
 }

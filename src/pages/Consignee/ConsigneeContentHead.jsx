@@ -3,11 +3,11 @@ import AddBtn from "../../components/Buttons/AddBtn";
 import { useState } from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { Helmet } from "react-helmet-async";
-import ExportsModal from "../../Modals/ExportsModal/ExportsModal";
 import toast, { Toaster } from "react-hot-toast";
 import { MdApartment } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { consigneeGlobalSearch } from "../../features/consignee/consigneeSlice";
+import ConsigneeModal from "../../Modals/ConsigneeModal/ConsigneeModal";
 
 const ConsigneeContentHead = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -19,7 +19,7 @@ const ConsigneeContentHead = () => {
 
   const closeModal = (success) => {
     if (success) {
-      toast.success("Exports Create Successfully");
+      toast.success("Consignee Create Successfully");
     }
     setModalIsOpen(false);
   };
@@ -57,7 +57,7 @@ const ConsigneeContentHead = () => {
           </div>
         </div>
       </div>
-      <ExportsModal isOpen={modalIsOpen} onClose={closeModal}></ExportsModal>
+      <ConsigneeModal isOpen={modalIsOpen} onClose={closeModal}></ConsigneeModal>
       <Toaster position="top-right"></Toaster>
     </div>
   );

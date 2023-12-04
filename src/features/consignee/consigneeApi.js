@@ -15,8 +15,17 @@ export const consigneeApi = apiSlice.injectEndpoints({
                 }
                 return `/consignees?page=${currentPage}&limit=${dataLimit}`
             },
+            providesTags: ["Consignees"]
+        }),
+        createConsignee: builder.mutation({
+            query: (data) => ({
+                url: `/consignees`,
+                method: "POST",
+                body: data
+            }),
+            invalidatesTags: ["Consignees"]
         })
     })
 })
 
-export const { useGetConsigneesQuery } = consigneeApi;
+export const { useGetConsigneesQuery, useCreateConsigneeMutation } = consigneeApi;
