@@ -62,7 +62,7 @@ const SidebarBody = () => {
         icon={<HiArrowsUpDown className="text-lg"></HiArrowsUpDown>}
       ></SidebarNavLink>
       <SidebarNavLink
-        route="/"
+        route="/containers"
         name="Containers"
         icon={<BsTruck className="text-lg"></BsTruck>}
       ></SidebarNavLink>
