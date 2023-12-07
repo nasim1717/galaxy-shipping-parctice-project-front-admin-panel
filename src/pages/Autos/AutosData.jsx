@@ -92,7 +92,7 @@ const AutosData = () => {
                     setSorted({ sorted: !sorted.sorted, ordBy: "lot_number" });
                     setSortStart(true);
                   }}
-                  className="px-4 underline "
+                  className="px-4 underline cursor-pointer"
                 >
                   <div className="flex  items-center gap-x-1">
                     <span>Lot Number</span>
@@ -108,7 +108,7 @@ const AutosData = () => {
                     setSorted({ sorted: !sorted.sorted, ordBy: "vin" });
                     setSortStart(true);
                   }}
-                  className="px-4 underline "
+                  className="px-4 underline cursor-pointer"
                 >
                   <div className="flex  items-center gap-x-1 ">
                     <span> VIN</span>
@@ -124,7 +124,7 @@ const AutosData = () => {
                     setSorted({ sorted: !sorted.sorted, ordBy: "year" });
                     setSortStart(true);
                   }}
-                  className="px-4 underline"
+                  className="px-4 underline cursor-pointer"
                 >
                   <div className="flex  items-center gap-x-1 ">
                     <span>Year</span>

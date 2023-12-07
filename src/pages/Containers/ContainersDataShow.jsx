@@ -16,16 +16,16 @@ const ContainersDataShow = ({ container, index, serial }) => {
   return (
     <tr className={`${index % 2 === 0 && "bg-gray-100"} rounded-md  text-[#4b5563]`}>
       <td className="px-4">{serial}</td>
-      <td>{loading_date}</td>
-      <td>{export_date}</td>
-      <td>{eta}</td>
-      <td>{booking_number}</td>
-      <td className="text-[#059669] font-bold">{container_number}</td>
-      <td>{terminal}</td>
-      <td>{vessel}</td>
-      <td>{destination}</td>
-      <td className="text-[#059669]">{note ? note : "Notes"}</td>
-      <td className="py-2">
+      <td className="px-4">{loading_date}</td>
+      <td className="px-4">{export_date}</td>
+      <td className="px-4">{eta}</td>
+      <td className="px-4">{booking_number}</td>
+      <td className="px-4 text-[#059669] font-bold">{container_number}</td>
+      <td className="px-4">{terminal}</td>
+      <td className="px-4">{vessel}</td>
+      <td className="px-4">{destination}</td>
+      <td className="px-4 text-[#059669]">{note ? note : "Notes"}</td>
+      <td className="px-1 py-2">
         <ViewButton></ViewButton>
       </td>
       <td></td>

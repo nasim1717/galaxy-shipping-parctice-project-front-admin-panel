@@ -85,6 +85,10 @@ const ExportsSearchRow = () => {
     dispatch(search(columSearch));
   };
 
+  const handleSearch = () => {
+    dispatch(search(columSearch));
+  };
+
   return (
     <tr className={`rounded-md`}>
       <td className="px-4">
@@ -217,7 +221,7 @@ const ExportsSearchRow = () => {
       <td className="px-4"></td>
       <td className="px-4"></td>
       <td className="">
-        <div className={`${scbtnOnOf ? "block" : "hidden"}`}>
+        <div onClick={handleSearch} className={`${scbtnOnOf ? "block" : "hidden"}`}>
           <button
             className={`btn hover:bg-[#047857] hover:text-white hover:shadow-2xl bg-[#dcfce7] text-[#065f46] font-extrabold `}
           >
