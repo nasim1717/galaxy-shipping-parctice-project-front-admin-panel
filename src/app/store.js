@@ -8,6 +8,7 @@ import customersSlice from "../features/customers/customersSlice";
 import exportsSlice from "../features/exports/exportsSlice";
 import consigneeSlice from "../features/consignee/consigneeSlice";
 import containersSlice from "../features/containers/containersSlice";
+import loadPlanSliece from "../features/loadPlan/loadPlanSliece";
 
 
 
@@ -21,7 +22,8 @@ const store = configureStore({
         customers: customersSlice,
         exportsSlice: exportsSlice,
         consigneeSlice: consigneeSlice,
-        containerSlice: containersSlice
+        containerSlice: containersSlice,
+        loadPlanSlice: loadPlanSliece
     },
     devTools: process.env.NODE_ENV !== "production",
     middleware: (getDefaultMiddlewares) => getDefaultMiddlewares().concat(apiSlice.middleware),

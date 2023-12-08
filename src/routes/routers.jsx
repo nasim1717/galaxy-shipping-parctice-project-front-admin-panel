@@ -7,6 +7,7 @@ import CustomersMain from "../pages/Customers/CustomersMain";
 import ExportsMain from "../pages/Exports/ExportsMain";
 import ConsigneeMain from "../pages/Consignee/ConsigneeMain";
 import ContainersMain from "../pages/Containers/ContainersMain";
+import LoadPlan from "../pages/LoadPlan/LoadPlan";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ContainersMain></ContainersMain>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/load-plans",
+        element: (
+          <PrivateRoute>
+            <LoadPlan></LoadPlan>
           </PrivateRoute>
         ),
       },

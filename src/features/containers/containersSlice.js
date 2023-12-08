@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const continerSlice = createSlice({
-    name: "exports",
+    name: "containers",
     initialState,
     reducers: {
         containerSearch: (state, action) => {

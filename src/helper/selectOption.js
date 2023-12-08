@@ -30,3 +30,43 @@ export const streamshipLine = [
     { value: "SEALAND", label: "SEALAND" },
     { value: "MEDITERRANEAN", label: "MEDITERRANEAN" },
 ];
+
+export const loadPlanPortOfLoading = [
+    { value: "1", label: "NEW JERSEY, NWJ" },
+    { value: "2", label: "HOUSTION, TX" },
+    { value: "3", label: "LOS ANGELES, CA" },
+    { value: "4", label: "NEWARK,NJ" },
+    { value: "5", label: "SAVANNAH, GA" },
+    { value: "6", label: "HOUSTON, TEXAS" },
+    { value: "7", label: "HONOLULU,HI" },
+    { value: "8", label: "BALTIMORE,MD" },
+];
+
+export const loadPlanPortOfDischarge = [
+    { value: "1", label: "JEBEL ALI, UAE" },
+    { value: "2", label: "AQABA,JORDAN" },
+    { value: "3", label: "KARACHI, PAKISTAN" },
+    { value: "4", label: "SOHAR, OMAN" },
+    { value: "5", label: "UMM QASR, IRAQ" },
+    { value: "6", label: "MERSIN, TURKEY" },
+    { value: "7", label: "CAMBODIA" },
+    { value: "8", label: "BAHRAIN" },
+    { value: "9", label: "MUSCAT, OMAN" },
+    { value: "10", label: "FREETOWN, SIERRA LEONE" },
+    { value: "11", label: "TEMA, GHANA" },
+    { value: "12", label: "VIETMAN" },
+    { value: "13", label: "BUSAN, KOREA" },
+    { value: "14", label: "GERMANY" },
+    { value: "15", label: "MISURATA, LIBYA" },
+    { value: "16", label: "NIGERIA" },
+    { value: "17", label: "DENMARK" },
+    { value: "18", label: "BENGHAZI, LIBYA" },
+    { value: "19", label: "MYANMAR" },
+    { value: "20", label: "SALAAH, OMAN" },
+];
+
+export const loadPlanStatus = [
+    { value: "1", label: "Pending" },
+    { value: "5", label: "Accepted" },
+    { value: "10", label: "Rejected" },
+];

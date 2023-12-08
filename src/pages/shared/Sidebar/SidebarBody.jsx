@@ -119,7 +119,7 @@ const SidebarBody = () => {
         </ul>
       </nav>
       <SidebarNavLink
-        route="/"
+        route="/load-plans"
         name="Load plan"
         icon={<CgRedo className="text-lg"></CgRedo>}
       ></SidebarNavLink>
