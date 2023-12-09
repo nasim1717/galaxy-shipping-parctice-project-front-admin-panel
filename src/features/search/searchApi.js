@@ -4,8 +4,11 @@ export const searchApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         consigneSearch: builder.query({
             query: (userId) => `/consignee-search?customer_user_id=${userId}`
+        }),
+        getLocation: builder.query({
+            query: () => `/settings/locations?status=1`
         })
     })
 });
 
-export const { useConsigneSearchQuery } = searchApi;
+export const { useConsigneSearchQuery, useGetLocationQuery } = searchApi;

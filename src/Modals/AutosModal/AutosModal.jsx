@@ -80,7 +80,7 @@ const AutosModal = ({ isOpen, onClose }) => {
     <>
       {isOpen && (
         <div
-          className={`fixed top-0 left-0 w-full h-full flex justify-center items-center backdrop-blur-sm bg-black bg-opacity-25 z-10 `}
+          className={`fixed top-0 left-0 w-full h-full flex justify-center items-center backdrop-blur-sm bg-black bg-opacity-25 z-50 `}
         >
           <div
             className={` bg-white rounded shadow-lg xl:w-9/12 w-11/12 h-[94%] mt-2 mb-2 relative  ${

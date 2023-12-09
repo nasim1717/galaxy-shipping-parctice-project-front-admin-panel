@@ -9,7 +9,7 @@ const Main = () => {
       <div className="flex relative">
         <Sidebar></Sidebar>
         <div className={`flex flex-col w-full gap-y-4 ml-5 mr-4  `}>
-          <header className="sticky top-0 w-full  z-50">
+          <header className="sticky top-0 w-full  z-10">
             <Navbar></Navbar>
           </header>
           <Outlet></Outlet>

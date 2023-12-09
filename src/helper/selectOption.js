@@ -70,3 +70,8 @@ export const loadPlanStatus = [
     { value: "5", label: "Accepted" },
     { value: "10", label: "Rejected" },
 ];
+
+export const towingRatesStatus = [
+    { value: "1", label: "Active" },
+    { value: "2", label: "Inactive" },
+]

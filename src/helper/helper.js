@@ -15,3 +15,8 @@ export const handelRemoveFile = (e, fileUrls) => {
     URL.revokeObjectURL(e);
     return result
 };
+
+
+export const onlyNumberCheck = (value) => {
+    return value.replace(/[^0-9]/g, "");
+};

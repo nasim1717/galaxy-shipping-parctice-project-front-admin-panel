@@ -13,7 +13,7 @@ export const countrysApi = apiSlice.injectEndpoints({
         }),
         getPort: builder.query({
             query: (id) => `settings/ports?state_id=${id}&status=1`
-        })
+        }),
     })
 });
 

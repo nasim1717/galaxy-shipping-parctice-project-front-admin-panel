@@ -71,10 +71,13 @@ const SidebarBody = () => {
         name="Gate pass"
         icon={<GiGate className="text-lg"></GiGate>}
       ></SidebarNavLink>
-      <nav onClick={() => setPricingOnOff(!pricingOnOff)} className="mx-3">
+      <nav className="mx-3">
         <ul>
           <li className={`${pricingOnOff && "bg-[#216046]"} hover:bg-[#216046] py-2 rounded-md`}>
-            <div className={`flex items-center pl-2  ${sidebarOpen ? "" : "gap-x-4"}`}>
+            <div
+              onClick={() => setPricingOnOff(!pricingOnOff)}
+              className={`flex items-center pl-2 cursor-pointer ${sidebarOpen ? "" : "gap-x-4"}`}
+            >
               <MdAddShoppingCart className="text-lg"></MdAddShoppingCart>
               <span className={`text-sm ${sidebarOpen ? "hidden" : ""}`}>Pricing</span>
               <MdKeyboardArrowRight
@@ -91,7 +94,7 @@ const SidebarBody = () => {
           >
             <li className={`space-y-3 mt-1 `}>
               <SidebarNavLink
-                route="/"
+                route="/towing-rates"
                 nestedMenu={nestedMenu}
                 name="Towing Rate"
                 icon={<HiMiniPencilSquare className="text-lg"></HiMiniPencilSquare>}

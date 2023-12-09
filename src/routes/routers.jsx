@@ -8,6 +8,7 @@ import ExportsMain from "../pages/Exports/ExportsMain";
 import ConsigneeMain from "../pages/Consignee/ConsigneeMain";
 import ContainersMain from "../pages/Containers/ContainersMain";
 import LoadPlan from "../pages/LoadPlan/LoadPlan";
+import TowingRatesMain from "../pages/TowingRates/TowingRatesMain";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <LoadPlan></LoadPlan>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/towing-rates",
+        element: (
+          <PrivateRoute>
+            <TowingRatesMain></TowingRatesMain>
           </PrivateRoute>
         ),
       },
