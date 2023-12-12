@@ -24,6 +24,7 @@ const ConsigneeForm = () => {
     formState: { errors },
     control,
     register,
+    setError,
   } = useFormContext();
 
   useEffect(() => {
@@ -152,7 +153,9 @@ const ConsigneeForm = () => {
             name="consignee_name"
             id="consgineeName"
             placeholder="Consignee Name"
-            className="consigne-modal-input py-[6px]"
+            className={`consigne-modal-input py-[6px] ${
+              errors?.consignee_name && "input-text-error border-red-500"
+            }`}
           />
           {errors?.consignee_name && (
             <MdErrorOutline className="absolute top-2 right-2 text-red-500"></MdErrorOutline>
@@ -170,7 +173,9 @@ const ConsigneeForm = () => {
             type="text"
             id="phone"
             placeholder="Phone"
-            className="consigne-modal-input py-[6px]"
+            className={`consigne-modal-input py-[6px]  ${
+              errors?.phone && "input-text-error border-red-500"
+            }`}
           />
           {errors?.phone && (
             <MdErrorOutline className="absolute top-2 right-2 text-red-500"></MdErrorOutline>
@@ -224,6 +229,8 @@ const ConsigneeForm = () => {
                       setSelectCity("");
                       setOptionsState([]);
                       setOptionsCity([]);
+                      setError("state", { message: "State is required" });
+                      setError("city", { message: "City is required" });
                     }
                   }}
                   value={
@@ -267,6 +274,7 @@ const ConsigneeForm = () => {
                       setSelectState("");
                       setSelectCity("");
                       setOptionsCity([]);
+                      setError("city", { message: "City is required" });
                     }
                   }}
                   value={

@@ -23,7 +23,11 @@ const InputBox = ({
           name={name}
           id={labelId}
           placeholder={placeholder}
-          className={cn("search-input w-full text-black py-[6px]", className)}
+          className={cn(
+            `${
+              errors?.[name] ? "input-text-error border-red-500" : ""
+            } search-input w-full text-black py-[6px]`
+          )}
         />
         {errors?.[name] && (
           <MdErrorOutline className="absolute top-2 right-2 text-red-500"></MdErrorOutline>

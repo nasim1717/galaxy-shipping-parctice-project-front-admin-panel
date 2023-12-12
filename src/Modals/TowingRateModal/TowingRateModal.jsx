@@ -5,9 +5,12 @@ import { RxCross2 } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import TowingRateForm from "./TowingRateForm";
 import { FormProvider, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { towinRatesApi } from "../../features/towinRates/towingRatesApi";
 
 // eslint-disable-next-line react/prop-types
 const TowingRateModal = ({ isOpen, onClose }) => {
+  const dispatch = useDispatch();
   const [isClosing, setIsClosing] = useState(false);
   const [loading, setLoading] = useState(false);
   const methods = useForm();
@@ -21,16 +24,48 @@ const TowingRateModal = ({ isOpen, onClose }) => {
     setIsClosing(true);
     setTimeout(() => {
       setIsClosing(false);
+      methods.reset();
       onClose(success);
     }, 100);
   };
 
   const onSubmit = (datas) => {
     console.log(datas);
+    setLoading(true);
+    const data = {
+      rate: datas.rate,
+      country_id: datas.country.value.id,
+      city_id: datas.city.value.id,
+      state_id: datas.state.value.id,
+      location_id: datas.yard.value.id,
+      status: datas.status ? 1 : 2,
+    };
+    dispatch(towinRatesApi.endpoints.createTowingRate.initiate(data))
+      .unwrap()
+      .then((res) => {
+        console.log(res);
+        setLoading(false);
+        handleClose(res.message);
+      })
+      .catch((error) => {
+        if (error?.data?.errors) {
+          Object.keys(error?.data?.errors).forEach((field) => {
+            if (error?.data?.errors[field]) {
+              methods.setError(field, { message: error?.data?.errors[field][0] });
+            } else {
+              methods.clearErrors(field);
+            }
+          });
+        }
+        setLoading(false);
+      });
+    console.log(data);
   };
 
   const handleFormSubmit = () => {
-    methods.handleSubmit(onSubmit)();
+    if (!loading) {
+      methods.handleSubmit(onSubmit)();
+    }
   };
 
   return (
@@ -65,7 +100,7 @@ const TowingRateModal = ({ isOpen, onClose }) => {
               <div onClick={handleFormSubmit} className="flex">
                 <SearchBtn
                   name={"Save"}
-                  loading={false}
+                  loading={loading}
                   icon={<AiOutlinePlus className="font-extrabold text-base"></AiOutlinePlus>}
                 ></SearchBtn>
                 {loading && (

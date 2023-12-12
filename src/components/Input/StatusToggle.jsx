@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const StatusToggle = ({ status, onChange }) => {
+const StatusToggle = ({ status, onChange, name }) => {
   return (
     <div className="flex items-center space-x-2">
       <label
@@ -8,7 +8,7 @@ const StatusToggle = ({ status, onChange }) => {
           status ? "bg-green-800" : "bg-gray-100"
         } border border-gray-400`}
       >
-        <input type="checkbox" className="hidden" checked={status} onChange={onChange} />
+        <input name={name} type="checkbox" className="hidden" onChange={onChange} />
         <span
           className={`slider absolute top-[.4px] cursor-pointer w-3 h-[13px]  ${
             status ? "bg-white" : "bg-gray-500"

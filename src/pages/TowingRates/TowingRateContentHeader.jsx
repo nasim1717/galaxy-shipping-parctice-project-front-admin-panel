@@ -14,7 +14,7 @@ const TowingRateContentHeader = () => {
 
   const closeModal = (success) => {
     if (success) {
-      toast.success("Consignee Create Successfully");
+      toast.success(success);
     }
     setModalIsOpen(false);
   };
